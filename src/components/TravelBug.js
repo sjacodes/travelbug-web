@@ -3,16 +3,16 @@ import './TravelBug.css'
 import Wishlist from './Wishlist/Wishlist';
 import HotelList from './HotelList/HotelList';
 // import Menu from './Menu/Menu';
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 import Homepage from './Homepage/Homepage';
 
 class TravelBug extends Component {
   state = {
-    activeItem: 'Homepage'
+    activeItem: 'Home'
   }
   
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (name) => this.setState({ activeItem: name })
 
   render () {
     
@@ -22,35 +22,46 @@ class TravelBug extends Component {
         <div className='menu'>
           <Menu pointing secondary>
             <Menu.Item
-              name='HotelList'
-              active={this.state.activeItem === 'HotelList'}
-              onClick={this.handleItemClick}
+              className="menu-home"
+              style={{marginRight: "22%", color: "white"}}
+              name="Home"
+              active={this.state.activeItem === 'Home'}
+              onClick={() => this.handleItemClick('Home')}
             />
             <Menu.Item
-              name='Homepage'
-              active={this.state.activeItem === 'Homepage'}
-              onClick={this.handleItemClick}
+              className="menu-hotels-list"
+              style={{marginRight: "22%", color: "white"}}
+              name="Explore"
+              active={this.state.activeItem === 'Explore'}
+              onClick={() => this.handleItemClick('Explore')}
             />
             <Menu.Item
-              name='Wishlist'
+              className="menu-wishlist"
+              style={{marginRight: "22%", color: "white"}}
+              name="Wishlist"
               active={this.state.activeItem === 'Wishlist'}
-              onClick={this.handleItemClick}
+              onClick={() => this.handleItemClick('Wishlist')}
             />
             <Menu.Item
-              name='Auth'
+              className="menu-sign-in"
+              style={{marginRight: "22%", color: "white"}}
+              name="Sign In"
               active={this.state.activeItem === 'Auth'}
-              onClick={this.handleItemClick}
+              onClick={() => this.handleItemClick('Auth')}
             />
           </Menu>
-        </div>   
+        </div>  
+        <div className="travel-bug">
+          TRAVEL BUG
+        </div> 
         <div>
-          <HotelList display={this.state.activeItem == "HotelList" ? true : false}/>
+          <HotelList display={this.state.activeItem === "Explore" ? true : false}/>
         </div>
         <div>
-          <Wishlist display={this.state.activeItem == "Wishlist" ? true : false}/>
+          <Wishlist display={this.state.activeItem === "Wishlist" ? true : false}/>
         </div>
         <div>
-          <Homepage display={this.state.activeItem == "Homepage" ? true : false}/>
+          <Homepage display={this.state.activeItem === "Home" ? true : false}/>
         </div>
       </div>
     )
