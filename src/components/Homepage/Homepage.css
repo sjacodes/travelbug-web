@@ -1,0 +1,159 @@
+.content-3 {
+  max-width: 100vw;
+  display: block;
+  max-height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box {
+  opacity: 0.8;
+  border-radius: 20px;
+  background-color: red;
+  height: 194px;
+  width: 194px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.travel-bug-invites {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.travel-bug-invites-body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  color: grey;
+}
+.box-position {
+  padding-top: 80px;
+}
+
+.box-text {
+  padding: 8px;
+  background-color: pink;
+  opacity: 1 !important;
+  z-index: 1;
+  font-weight: 300;
+  font-size: 20px;
+  color: white;
+  font-style: bo;
+  font-weight: 500;
+}
+.grid-boxes {
+  margin-top: 45px !important;
+}
+
+.homepage-hotel-text {
+  margin-left: 20px;
+}
+
+.box-1 {
+  background-image: url("../../Assets/bayhotel.jpg")
+}
+
+.box-2 {
+  background-image: url("../../Assets/grandhotel.jpg")
+}
+
+.box-3 {
+  background-image: url("../../Assets/spahotel.jpg")
+}
+
+.second-box {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+}
+
+.third-box {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+}
+
+.content-2-padding {
+  padding: 20px;
+}
+
+
+.bottom-images-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .homepage-hotel-img {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .homepage-hotel-text {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media only screen and (max-width : 576px) {
+  .bottom-images-text {
+    padding-left: 50px;
+    padding-right: 50px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    text-align: left;
+  }
+}
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+  .travel-bug-invites {
+    font-size: 22px;
+  }
+  .travel-bug-invites-body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: grey;
+  }
+  .bottom-images-text {
+    padding-left: 50px;
+    padding-right: 50px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    text-align: left;
+  }
+  
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}

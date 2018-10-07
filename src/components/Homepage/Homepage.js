@@ -1,60 +1,67 @@
 import React, { Component } from 'react'
 import video from './travel.mp4';
-import { Grid, Image, Segment } from 'semantic-ui-react'
+import image from '../../Assets/homepageImage.jpg';
+import image2 from '../../Assets/BottomBladeImage1.jpg';
+import image3 from '../../Assets/BottomBladeImage2.jpg';
+
+import { Image, Grid } from 'semantic-ui-react'
+import './Homepage.css'
 
 class Homepage extends Component {
   render () {
     return (
         <div style={{display: this.props.display ? '' : 'none'}} className='homepage'>
-        {/* <Grid stackable columns={2}>
-          <Grid.Column>
-              <video autoPlay loop muted className="myVideo" style={{ maxWidth: "100vw", display: "block", maxHeight: "400px", marginLeft: "auto", marginRight: "auto" }}>
-                <source src={video} type="video/mp4"/>
-              </video>
-          </Grid.Column>
-          <Grid.Column>
-              <div>
-                Map out your next adventure
-              </div>
-          </Grid.Column>
-        </Grid> */}
+
           <div className='content-1'>
             <video autoPlay loop muted className="myVideo" 
             style={{ 
               maxWidth: "100vw", 
               display: "block",
-              maxHeight: "400px",
+              maxHeight: "450px",
               marginLeft: "auto",
               marginRight: "auto" 
             }}>
               <source src={video} type="video/mp4"/>
             </video>
-            <div class="overlay">
-              Map out your next adventure
-          </div>
           </div>
           <div className='content-2'>
-            <div className="testimonial-large">
-              <div className="testimonial-img">
-              </div>
-              <div>
-                <div className="testimonial-text">
-                </div>
-                <div className="testimonial-italic-text">
-                </div>
-              </div>
-            </div>
-            <div>
+            <div className="second-box">
+              <Grid stackable columns={2}>
+                <Grid.Column>
+                    <Image className="homepage-hotel-img" src={image}/>
+                </Grid.Column>
+                <Grid.Column>
+                    <div className="homepage-hotel-text">
+                      <div className="travel-bug-invites">
+                        You are invited ...
+                      </div>
+                      <div className="travel-bug-invites-body">
+                        ... on a visual journey through the world's top 100 hotels. See something you like, add it to your wish list and always remember to think big!
+                      </div>
+                    </div>
+                </Grid.Column>
+              </Grid>
             </div>
           </div>
           <div className='content-3'>
-            <div className="box-1">
-            </div>
-            <div className="box-2">
-            </div>
-            <div className="box-3">
+          <div className="third-box">
+              <Grid stackable columns={2}>
+                <Grid.Column style={{ border: '1px solid transparent', borderRightColor: 'black' }}>
+                    <Image className="homepage-hotel-img-third" src={image2}/>
+                    <div className="bottom-images-text">
+                      Never again will you be uninspired.
+                    </div>
+                </Grid.Column>
+                <Grid.Column>
+                    <Image className="homepage-hotel-img-third" src={image3}/>
+                    <div className="bottom-images-text">
+                      Stay organised & make sure you get what you want.
+                    </div>
+                </Grid.Column>
+              </Grid>
             </div>
           </div>
+          
         </div>
         )
   }

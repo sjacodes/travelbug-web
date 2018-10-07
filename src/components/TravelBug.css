@@ -24,18 +24,73 @@
   color: #d8b2b8 !important;
 }
 
+.background-home {
+  background-image: url("../Assets/background-img.png") !important;
+}
+
 .travel-bug  {
   letter-spacing: 10px;
-  padding: 110px;
+  padding: 80px;
   max-width: 100vw;
   margin: auto;
   text-align: center;
   font-family: SackersGothicStd-Heavy, sans-serif;
   font-weight: 500;
-  font-size: 46px;
+  font-size: 50px;
   font-style: initial;
+}
+
+.travel-title {
+  color: #2f302f;
+  font-family: SackersGothicStd-Heavy, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  padding: 10px 30px;
+  background-color: #f2e4df;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 74px;
 }
 
 
 
-  
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+
+    }
+    @media only screen and (max-width : 574px) {
+      .travel-bug {
+        font-size: 28px;
+      }
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+      .travel-bug {
+        font-size: 26px;
+      }
+    }
+    @media only screen and (max-width : 423px) {
+      .travel-bug {
+        font-size: 22px;
+      }
+    }
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 320px) {
+
+    }

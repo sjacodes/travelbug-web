@@ -15,8 +15,6 @@ class TravelBug extends Component {
   handleItemClick = (name) => this.setState({ activeItem: name })
 
   render () {
-    
-    console.log('What is the active item', this.state.activeItem)
     return (
       <div>
         <div className='menu'>
@@ -54,14 +52,19 @@ class TravelBug extends Component {
         <div className="travel-bug">
           TRAVEL BUG
         </div> 
-        <div>
-          <HotelList display={this.state.activeItem === "Explore" ? true : false}/>
-        </div>
-        <div>
-          <Wishlist display={this.state.activeItem === "Wishlist" ? true : false}/>
-        </div>
-        <div>
-          <Homepage display={this.state.activeItem === "Home" ? true : false}/>
+        <div className="travel-title" style={{display: this.state.activeItem !== "Home" ? '' : 'none'}}>
+          {this.state.activeItem}
+        </div> 
+        <div className="background-home">
+          <div>
+            <HotelList display={this.state.activeItem === "Explore" ? true : false}/>
+          </div>
+          <div>
+            <Wishlist display={this.state.activeItem === "Wishlist" ? true : false}/>
+          </div>
+          <div>
+            <Homepage display={this.state.activeItem === "Home" ? true : false}/>
+          </div>
         </div>
       </div>
     )
