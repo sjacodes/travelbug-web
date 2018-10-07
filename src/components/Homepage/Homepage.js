@@ -38,6 +38,9 @@ class Homepage extends Component {
                       <div className="travel-bug-invites-body">
                         ... on a visual journey through the world's top 100 hotels. See something you like, add it to your wish list and always remember to think big!
                       </div>
+                      <button className="explore-hotels-btn" onClick={() => this.props.handleItemClick('Explore')}> 
+                        Start Exploring
+                      </button>
                     </div>
                 </Grid.Column>
               </Grid>
@@ -46,7 +49,7 @@ class Homepage extends Component {
           <div className='content-3'>
           <div className="third-box">
               <Grid stackable columns={2}>
-                <Grid.Column style={{ border: '1px solid transparent', borderRightColor: 'black' }}>
+                <Grid.Column>
                     <Image className="homepage-hotel-img-third" src={image2}/>
                     <div className="bottom-images-text">
                       Never again will you be uninspired.

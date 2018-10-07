@@ -78,6 +78,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 80px;
+  margin-bottom: 20px;
 }
 
 .content-2-padding {
@@ -94,7 +95,28 @@
   text-align: center;
 }
 
+.explore-hotels-btn {
+  margin-top: 20px;
+  color: #2f302f;
+  font-family: SackersGothicStd-Heavy, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  padding: 10px 30px;
+  background-color: #f2e4df;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 74px;
+  display: inline-block;
+}
 
+.explore-hotels-btn:hover {
+  opacity: 0.5;
+}
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {

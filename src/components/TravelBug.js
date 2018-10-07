@@ -3,22 +3,42 @@ import './TravelBug.css'
 import Wishlist from './Wishlist/Wishlist';
 import HotelList from './HotelList/HotelList';
 // import Menu from './Menu/Menu';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Message } from 'semantic-ui-react'
 
 import Homepage from './Homepage/Homepage';
 
 class TravelBug extends Component {
   state = {
-    activeItem: 'Home'
+    activeItem: 'Home',
+    hotelsInWunderlist: []
   }
   
   handleItemClick = (name) => this.setState({ activeItem: name })
+
+
+  addToWunderlist = (hotel) => {
+    if (this.state.hotelsInWunderlist.includes(hotel)) return;
+    this.setState({
+      hotelsInWunderlist: [...this.state.hotelsInWunderlist, hotel],
+      activeItem: "Wishlist"
+    })
+  }
+
+  removeHotelFromWunderlist = selectedHotel => {
+    this.setState({
+      hotelsInWunderlist: this.state.hotelsInWunderlist.filter(hotel => selectedHotel !== hotel)
+    })
+  }
+
+  hasHotelBeenAddedToWunderList = hotel => {
+    return this.state.hotelsInWunderlist.includes(hotel)
+  }
 
   render () {
     return (
       <div>
         <div className='menu'>
-          <Menu pointing secondary>
+          <Menu stackable pointing secondary>
             <Menu.Item
               className="menu-home"
               style={{marginRight: "22%", color: "white"}}
@@ -57,14 +77,26 @@ class TravelBug extends Component {
         </div> 
         <div className="background-home">
           <div>
-            <HotelList display={this.state.activeItem === "Explore" ? true : false}/>
+            <HotelList display={this.state.activeItem === "Explore" ? true : false}
+              addToWunderlist={this.addToWunderlist}
+              removeHotelFromWunderlist={this.removeHotelFromWunderlist}
+              hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
+            />
           </div>
           <div>
-            <Wishlist display={this.state.activeItem === "Wishlist" ? true : false}/>
+            <Wishlist display={this.state.activeItem === "Wishlist" ? true : false}
+            hotelsInWunderlist={this.state.hotelsInWunderlist}
+            addToWunderlist={this.addToWunderlist}
+            removeHotelFromWunderlist={this.removeHotelFromWunderlist}
+            hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
+            />
           </div>
           <div>
-            <Homepage display={this.state.activeItem === "Home" ? true : false}/>
+            <Homepage handleItemClick={this.handleItemClick} display={this.state.activeItem === "Home" ? true : false}/>
           </div>
+        </div>
+        <div className="site-footer">
+          © Sarah Jacob 2018
         </div>
       </div>
     )

@@ -1,6 +1,26 @@
 import React, { Component } from 'react'
+import HotelCollection from './HotelCollection'
 
 class HotelList extends Component {
+
+  state = {
+    hotels: []
+  }
+
+  getHotels = () => {
+    fetch('http://localhost:3000/hotels')
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      hotels: data
+    }))
+  }
+
+  componentDidMount = () => {
+    this.getHotels()
+  }
+
+
+
   render () {
     return (
     <div style={{display: this.props.display ? '' : 'none'}} className='hotel-list'>
@@ -10,6 +30,11 @@ class HotelList extends Component {
         </div>
         <div className='intro-body'>
         </div>
+        < HotelCollection hotels={this.state.hotels} 
+          addToWunderlist={this.props.addToWunderlist}
+          removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}
+          hasHotelBeenAddedToWunderList={this.props.removeHotelFromWunderlist}
+        />
       </div>
       <div className='hotel'>
         <div className='hotel-image'>
