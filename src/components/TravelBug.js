@@ -4,7 +4,6 @@ import Wishlist from './Wishlist/Wishlist';
 import HotelList from './HotelList/HotelList';
 // import Menu from './Menu/Menu';
 import { Menu, Message } from 'semantic-ui-react'
-
 import Homepage from './Homepage/Homepage';
 
 class TravelBug extends Component {

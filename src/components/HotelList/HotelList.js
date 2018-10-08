@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import HotelCollection from './HotelCollection'
+import './HotelList.css'
+
 
 class HotelList extends Component {
 
@@ -24,7 +26,6 @@ class HotelList extends Component {
   render () {
     return (
     <div style={{display: this.props.display ? '' : 'none'}} className='hotel-list'>
-      This is hotel list
       <div className='intro-to-hotels'>
         <div className='intro-header'>
         </div>

@@ -3,7 +3,6 @@ import video from './travel.mp4';
 import image from '../../Assets/homepageImage.jpg';
 import image2 from '../../Assets/BottomBladeImage1.jpg';
 import image3 from '../../Assets/BottomBladeImage2.jpg';
-
 import { Image, Grid } from 'semantic-ui-react'
 import './Homepage.css'
 

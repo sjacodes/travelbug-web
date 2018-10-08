@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import './HotelList.css'
+
 
 
 class HotelCollection extends Component {
@@ -9,14 +11,15 @@ class HotelCollection extends Component {
     <div className='hotel-collection'>
         {
          this.props.hotels.map(hotel =>
-          <div>
+          <p>
             <img src={hotel.imageurl}/>
-            <h3> {hotel.name}</h3>
-            <p>{hotel.city} | {hotel.country} </p> 
-            <button onClick={() => this.props.addToWunderlist(hotel)}>
+            <h3 className="hotel-list-image-heading"> {hotel.name}</h3>
+            <p className="hotel-list-image-city-and-country">{hotel.city} | {hotel.country} </p> 
+            <button className="hotel-list-add-to-wishlist-buttons" onClick={() => this.props.addToWunderlist(hotel)}>
               Add to Wunderlist
             </button>
-          </div>
+          </p>
+
         )
         }
     </div>
