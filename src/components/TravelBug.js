@@ -19,7 +19,7 @@ class TravelBug extends Component {
     if (this.state.hotelsInWunderlist.includes(hotel)) return;
     this.setState({
       hotelsInWunderlist: [...this.state.hotelsInWunderlist, hotel],
-      activeItem: "Wishlist"
+      activeItem: "Wanderlist"
     })
   }
 
@@ -55,9 +55,9 @@ class TravelBug extends Component {
             <Menu.Item
               className="menu-wishlist"
               style={{marginRight: "22%", color: "white"}}
-              name="Wishlist"
-              active={this.state.activeItem === 'Wishlist'}
-              onClick={() => this.handleItemClick('Wishlist')}
+              name="Wanderlist"
+              active={this.state.activeItem === 'Wanderlist'}
+              onClick={() => this.handleItemClick('Wanderlist')}
             />
             <Menu.Item
               className="menu-sign-in"
@@ -83,7 +83,7 @@ class TravelBug extends Component {
             />
           </div>
           <div>
-            <Wishlist display={this.state.activeItem === "Wishlist" ? true : false}
+            <Wishlist display={this.state.activeItem === "Wanderlist" ? true : false}
             hotelsInWunderlist={this.state.hotelsInWunderlist}
             addToWunderlist={this.addToWunderlist}
             removeHotelFromWunderlist={this.removeHotelFromWunderlist}

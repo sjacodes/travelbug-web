@@ -16,7 +16,7 @@ class HotelCollection extends Component {
             <h3 className="hotel-list-image-heading"> {hotel.name}</h3>
             <p className="hotel-list-image-city-and-country">{hotel.city} | {hotel.country} </p> 
             <button className="hotel-list-add-to-wishlist-buttons" onClick={() => this.props.addToWunderlist(hotel)}>
-              Add to Wunderlist
+              Add to Wanderlist
             </button>
           </p>
 

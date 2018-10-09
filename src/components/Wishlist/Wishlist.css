@@ -1,0 +1,52 @@
+
+.wishlist-hotel-image {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    color: grey;
+}
+
+.wishlist-hotel-checklist {
+  max-width: "100%";
+  padding-top: 60px;
+}
+
+.wishlist-hotel-note {
+  padding-top: 40px;
+  padding-right: 40px;
+}
+
+.note {
+  padding-top: 50px;
+  padding-bottom: 40px
+}
+
+.remove-from-wishlist-button:hover {
+  color: black;
+  background-color: #f2e4df;
+}
+
+.remove-from-wishlist-button {
+  margin-top: 100px;
+  margin-bottom: 74px;
+  margin-right: 70px;
+  margin-left: 15px;
+  color: white;
+  font-family: SackersGothicStd-Heavy, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 2;
+  padding: 10px 30px;
+  background-color: black;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.blade {
+  border-style: dotted;
+  border-color: white white #e7e7e7 white;
+}
