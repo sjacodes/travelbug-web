@@ -7,12 +7,21 @@
   font-family: 'Playfair Display', serif !important;
   font-size: 26px;
   line-height: 1.1;
+  color: black;
+  margin-top: 40px;
+  margin-bottom: 40px !important;
+  padding-bottom: 60px;
+}
+
+.hotel-list-image-heading:hover {
+  color: grey;
 }
 
 .hotel-list-image-city-and-country {
   font-family: 'Montserrat', sans-serif;
   font-size: 17px;
   color: grey;
+  margin-top: 15px;
 }
 
 .hotel-list-add-to-wishlist-buttons {
@@ -32,5 +41,11 @@
   font-size: 12px;
   margin-bottom: 40px;
   display: inline-block;
+}
+
+
+.hotel-list-add-to-wishlist-buttons:hover {
+  color: #f2e4df;
+  opacity: 0.5;
 }
 

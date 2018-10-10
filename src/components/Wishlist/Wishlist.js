@@ -10,11 +10,11 @@ class Wishlist extends Component {
     
       <div style={{display: this.props.display ? '' : 'none'}} className='wishlist'>
         { this.props.hotelsInWunderlist.map((hotel => 
-          <Grid className="blade">
+          <Grid key={hotel.id}className="blade">
             <Grid.Column   width={5}>
               <div className='wishlist-hotel-image'>
                 <h3 style={{paddingLeft: "40px"}}> {hotel.name}, {hotel.city}</h3>
-                <img style={{maxWidth: "100%",  paddingLeft: "40px", paddingBottom: "50px"}} src={hotel.imageurl}/>
+                <img style={{maxWidth: "100%",  paddingLeft: "40px", paddingBottom: "50px"}} src={hotel.imageurl} alt=""/>
                 
               </div>           
             </Grid.Column>

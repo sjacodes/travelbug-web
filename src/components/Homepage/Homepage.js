@@ -57,7 +57,7 @@ class Homepage extends Component {
                 <Grid.Column>
                     <Image className="homepage-hotel-img-third" src={image3}/>
                     <div className="bottom-images-text">
-                      Stay organised & make sure you get what you want.
+                      Stay organised & make sure you get what you want out of your holiday stay.
                     </div>
                 </Grid.Column>
               </Grid>
