@@ -20,7 +20,7 @@ class Homepage extends Component {
               marginLeft: "auto",
               marginRight: "auto" 
             }}>
-              <source src={video} type="video/mp4"/>
+                <source src={video} type="video/mp4"/>
             </video>
           </div>
           <div className='content-2'>
@@ -30,6 +30,7 @@ class Homepage extends Component {
                     <Image className="homepage-hotel-img" src={image}/>
                 </Grid.Column>
                 <Grid.Column>
+                  <div className="homepage-hotel-text-div-for-background-image"> 
                     <div className="homepage-hotel-text">
                       <div className="travel-bug-invites">
                         You are invited ...
@@ -40,6 +41,7 @@ class Homepage extends Component {
                       <button className="explore-hotels-btn" onClick={() => this.props.handleItemClick('Explore')}> 
                         Start Exploring
                       </button>
+                    </div>
                     </div>
                 </Grid.Column>
               </Grid>
@@ -52,6 +54,11 @@ class Homepage extends Component {
                     <Image className="homepage-hotel-img-third" src={image2}/>
                     <div className="bottom-images-text">
                       Never again will you be uninspired.
+                    </div>
+                    <div className="button-wrapper">
+                      <button className="set-up-your-account-button" onClick={() => this.props.handleItemClick('Sign In')}> 
+                          Set up your account
+                      </button>
                     </div>
                 </Grid.Column>
                 <Grid.Column>

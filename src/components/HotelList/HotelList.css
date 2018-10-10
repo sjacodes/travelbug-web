@@ -1,6 +1,8 @@
 
 .hotel-collection {
   text-align: center;
+  overflow-y: scroll;
+  margin-bottom: 60px;
 }
 
 .hotel-list-image-heading {
@@ -18,14 +20,18 @@
 }
 
 .hotel-list-image-city-and-country {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 17px;
-  color: grey;
-  margin-top: 15px;
+  font-family: SackersGothicStd-Heavy, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 5;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-decoration: none;
 }
 
 .hotel-list-add-to-wishlist-buttons {
-  margin-top: 6px;
   color: white;
   font-family: SackersGothicStd-Heavy, sans-serif;
   font-weight: normal;
@@ -49,3 +55,28 @@
   opacity: 0.5;
 }
 
+.intro-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.intro-body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: grey;
+  text-align: center;
+  margin-left: 270px;
+  margin-right: 270px;
+  letter-spacing: 1px;
+  margin-bottom: 57px;
+
+}
+
+/* 
+.intro-to-hotels::after {
+  background-image: url("../Assets/feature-brush.png") !important;
+} */

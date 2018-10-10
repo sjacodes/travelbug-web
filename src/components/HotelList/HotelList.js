@@ -27,10 +27,13 @@ class HotelList extends Component {
     return (
     <div style={{display: this.props.display ? '' : 'none'}} className='hotel-list'>
       <div className='intro-to-hotels'>
-        <div className='intro-header'>
-        </div>
-        <div className='intro-body'>
-        </div>
+          <div className='intro-header'>
+            We've got that travel bug and we are here to spread it. 
+          </div>
+          <div className='intro-body'>
+            Since all good holidays start with some inspiration, we've collated the world's best hotels to wet your appetite. <br/> Have a scroll, you know you want to.  And don't forget to add what you like to your wanderlist! 
+          </div>
+  
         < HotelCollection hotels={this.state.hotels} 
           addToWunderlist={this.props.addToWunderlist}
           removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}

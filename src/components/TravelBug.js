@@ -63,8 +63,8 @@ class TravelBug extends Component {
               className="menu-sign-in"
               style={{marginRight: "22%", color: "white"}}
               name="Sign In"
-              active={this.state.activeItem === 'Auth'}
-              onClick={() => this.handleItemClick('Auth')}
+              active={this.state.activeItem === 'Sign In'}
+              onClick={() => this.handleItemClick('Sign In')}
             />
           </Menu>
         </div>  
@@ -83,7 +83,7 @@ class TravelBug extends Component {
             />
           </div>
           <div>
-            <Wishlist display={this.state.activeItem === "Wanderlist" ? true : false}
+            <Wishlist handleItemClick={this.handleItemClick} display={this.state.activeItem === "Wanderlist" ? true : false}
             hotelsInWunderlist={this.state.hotelsInWunderlist}
             addToWunderlist={this.addToWunderlist}
             removeHotelFromWunderlist={this.removeHotelFromWunderlist}

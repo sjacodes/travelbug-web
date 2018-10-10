@@ -3,18 +3,22 @@ import { Grid, Checkbox, Form, TextArea } from 'semantic-ui-react'
 import './Wishlist.css'
 
 
-
 class Wishlist extends Component {
   render () {
     return (
     
       <div style={{display: this.props.display ? '' : 'none'}} className='wishlist'>
+      <div className="wish-list-instructions">
+        Everyone deserves a space where they can curate their very own wanderlist. 
+        <br/>
+        This is yours.
+      </div>
         { this.props.hotelsInWunderlist.map((hotel => 
           <Grid key={hotel.id}className="blade">
             <Grid.Column   width={5}>
               <div className='wishlist-hotel-image'>
-                <h3 style={{paddingLeft: "40px"}}> {hotel.name}, {hotel.city}</h3>
-                <img style={{maxWidth: "100%",  paddingLeft: "40px", paddingBottom: "50px"}} src={hotel.imageurl} alt=""/>
+                <a className="wishlist-hotel-image" style={{paddingLeft: "40px"}} href={"http://" + hotel.website}> {hotel.name}, {hotel.city}</a>
+                <img style={{maxWidth: "100%",  paddingTop: "20px", paddingLeft: "40px", paddingBottom: "50px"}} src={hotel.imageurl} alt=""/>
                 
               </div>           
             </Grid.Column>
@@ -57,6 +61,11 @@ class Wishlist extends Component {
             </Grid.Column>
           </Grid>
         ))}
+
+      <div className="wrapper">
+        <button className="back-to-hotel-list" onClick={() => this.props.handleItemClick('Explore')}> Let's get back to exploring </button>
+      </div>
+      
       </div>
         )
   }
