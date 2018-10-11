@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './HotelList.css'
-
-// {"http://" + hotel.website}
+import API from '../../adapters/API'
 
 
 
@@ -25,7 +24,6 @@ class HotelCollection extends Component {
               Add to Wanderlist
             </button>
           </p>
-
         )
         }
     </div>

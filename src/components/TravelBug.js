@@ -2,14 +2,18 @@ import React, { Component } from 'react'
 import './TravelBug.css'
 import Wishlist from './Wishlist/Wishlist';
 import HotelList from './HotelList/HotelList';
-// import Menu from './Menu/Menu';
 import { Menu } from 'semantic-ui-react'
 import Homepage from './Homepage/Homepage';
+import SignInPage from './SignInPage/SignInPage';
+import API from '../adapters/API'
+
+
 
 class TravelBug extends Component {
   state = {
     activeItem: 'Home',
-    hotelsInWunderlist: []
+    hotelsInWunderlist: [],
+    currentUser: undefined,
   }
   
   handleItemClick = (name) => this.setState({ activeItem: name })
@@ -17,10 +21,13 @@ class TravelBug extends Component {
 
   addToWunderlist = (hotel) => {
     if (this.state.hotelsInWunderlist.includes(hotel)) return;
-    this.setState({
-      hotelsInWunderlist: [...this.state.hotelsInWunderlist, hotel],
+    API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      hotelsInWunderlist: data,
       activeItem: "Wanderlist"
-    })
+    }))
+    
   }
 
   removeHotelFromWunderlist = selectedHotel => {
@@ -31,6 +38,12 @@ class TravelBug extends Component {
 
   hasHotelBeenAddedToWunderList = hotel => {
     return this.state.hotelsInWunderlist.includes(hotel)
+  }
+
+  handleUser = (user) => {
+    this.setState({
+      currentUser: user
+    })
   }
 
   render () {
@@ -80,6 +93,7 @@ class TravelBug extends Component {
               addToWunderlist={this.addToWunderlist}
               removeHotelFromWunderlist={this.removeHotelFromWunderlist}
               hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
+              handleUser={this.handleUser} 
             />
           </div>
           <div>
@@ -92,6 +106,9 @@ class TravelBug extends Component {
           </div>
           <div>
             <Homepage handleItemClick={this.handleItemClick} display={this.state.activeItem === "Home" ? true : false}/>
+          </div>
+          <div>
+            <SignInPage handleUser={this.handleUser} handleItemClick={this.handleItemClick} display={this.state.activeItem === "Sign In" ? true : false}/>
           </div>
         </div>
         <div className="site-footer">

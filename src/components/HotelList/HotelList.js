@@ -38,6 +38,7 @@ class HotelList extends Component {
           addToWunderlist={this.props.addToWunderlist}
           removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}
           hasHotelBeenAddedToWunderList={this.props.removeHotelFromWunderlist}
+          handleUser={this.props.handleUser} 
         />
       </div>
       <div className='hotel'>

@@ -1,0 +1,50 @@
+.forms {
+  text-align: center;
+  margin-left: 500px;
+  margin-right: 500px;
+}
+
+.sign-in-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  line-height: 3;
+}
+
+.sign-up-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  line-height: 3;
+  margin-top: 20px;
+}
+
+
+.or {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  color: pink;
+
+}
+
+.sign-in-button {
+  color: white;
+  font-family: SackersGothicStd-Heavy, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  padding: 10px 30px;
+  background-color: #2f302f;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 40px;
+  display: inline-block;
+}
+
+
+.sign-in-button:hover {
+  color: #f2e4df;
+  opacity: 0.5;
+}
