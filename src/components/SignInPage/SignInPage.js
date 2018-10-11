@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
 import './SignInPage.css'
+import LogOutForm from './LogOutForm'
 
 
 class SignInPage extends Component {
@@ -20,7 +21,7 @@ class SignInPage extends Component {
   render() {
     return (
       <div style={{display: this.props.display ? '' : 'none'}} className='sign-in-page'>
-        <div className="forms">
+        <div className='forms'>
           <SignInForm onSubmit={this.signIn} handleUser={this.props.handleUser} />
           <SignUpForm onSubmit={this.signUp} handleUser={this.props.handleUser}/>
         </div>
@@ -33,3 +34,13 @@ class SignInPage extends Component {
 
 
 export default SignInPage
+
+
+// {
+//   this.props.handleUser ?
+//   <LogOutForm /> :
+//   <div className="forms">
+//   <SignInForm onSubmit={this.signIn} handleUser={this.props.handleUser} />
+//   <SignUpForm onSubmit={this.signUp} handleUser={this.props.handleUser}/>
+// </div>
+// }
