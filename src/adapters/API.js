@@ -44,7 +44,12 @@ class API {
   }
 
 
-
+  static fetchWishlist (user) {
+    return fetch(API.baseURL + '/users/' + user.id + '/wishlist/', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+  }
 
 
   static saveUsersWishlistedHotels (hotel, user) {

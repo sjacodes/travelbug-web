@@ -41,10 +41,19 @@ class TravelBug extends Component {
   }
 
   handleUser = (user) => {
-    this.setState({
-      currentUser: {email: user.email, id: user.id},
-      hotelsInWunderlist: user.wishlisted_hotels
-    })
+    window.localStorage.setItem('user', JSON.stringify(user))
+    this.setState(
+      {
+        currentUser: {email: user.email, id: user.id}
+      },
+      () => {
+        API.fetchWishlist(this.state.currentUser)
+          .then(res => res.json())
+          .then(data => this.setState({
+            hotelsInWunderlist: data
+          }))
+      }
+    )
   }
 
   render () {
