@@ -16,7 +16,7 @@ class TravelBug extends Component {
     currentUser: undefined,
   }
   
-  handleItemClick = (name) => this.setState({ activeItem: name })
+  handleItemClick = (name) => this.setState({ activeItem: name }, () => window.scrollTo(0,0))
 
 
   addToWunderlist = (hotel) => {
@@ -42,7 +42,8 @@ class TravelBug extends Component {
 
   handleUser = (user) => {
     this.setState({
-      currentUser: user
+      currentUser: {email: user.email, id: user.id},
+      hotelsInWunderlist: user.wishlisted_hotels
     })
   }
 
