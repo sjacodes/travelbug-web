@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Grid, Checkbox, Form, TextArea } from 'semantic-ui-react'
-import WishlistItem from './WishlistItem'
 import './Wishlist.css'
+import WishlistItem from './WishlistItem'
 
 
 class Wishlist extends Component {
@@ -14,9 +14,10 @@ class Wishlist extends Component {
         <br/>
         This is yours.
       </div>
-      <div className="wish-list-items">
-        <WishlistItem hotelsInWunderlist={this.props.hotelsInWunderlist}/>
-      </div>
+        { this.props.hotelsInWunderlist.map((hotel => 
+          < WishlistItem hotel={hotel}/>
+        ))}
+
       <div className="wrapper">
         <button className="back-to-hotel-list" onClick={() => this.props.handleItemClick('Explore')}> Let's get back to exploring </button>
       </div>
