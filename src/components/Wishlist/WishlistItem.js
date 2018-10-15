@@ -35,7 +35,9 @@ class WishlistItem extends Component {
               <div className='wishlist-hotel-note'>
                 <div style={{maxWidth: "100%"}}>
                   <Form style={{paddingLeft: "20px"}}>
-                    <TextArea className="note" style={{ minHeight: 250}} placeholder='Sticky notes are so old-school. Instead, we want you to use this digital space to write down your questions & comments you might want to look into before you go ahead and book your holiday.' />
+                    <TextArea className="note" style={{ minHeight: 250}} placeholder='Sticky notes are so old-school. Instead, we want you to use this digital space to write down your questions & comments you might want to look into before you go ahead and book your holiday.' 
+                    onChange={(event) => this.props.changeWishlistItemNote(this.props.hotel.id, event.target.value)} 
+                    value={this.props.hotel.note} />
                   </Form>
                 </div>
               </div>

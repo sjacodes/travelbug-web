@@ -17,10 +17,12 @@ class Wishlist extends Component {
         { this.props.hotelsInWunderlist.map((hotel => 
           < WishlistItem hotel={hotel}
             changeWishlistItem={this.props.changeWishlistItem}
+            changeWishlistItemNote={this.props.changeWishlistItemNote}
             hotelsInWunderlist={this.props.hotelsInWunderlist}
             addToWunderlist={this.props.addToWunderlist}
             removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}
-            hasHotelBeenAddedToWunderList={this.props.removeHotelFromWunderlist}/>
+            hasHotelBeenAddedToWunderList={this.props.removeHotelFromWunderlist}
+            />
         ))}
 
       <div className="wrapper">

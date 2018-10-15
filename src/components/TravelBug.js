@@ -39,7 +39,7 @@ class TravelBug extends Component {
   // }
 
 
-  changeWishlistItem = (wishlistedHotelId, item, itemIndex) => {
+  changeWishlistItem = (wishlistedHotelId, itemIndex) => {
     const wishlistedHotel = this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
     const wishlistedHotels = this.state.hotelsInWunderlist
     const wlhIndex = wishlistedHotels.indexOf(wishlistedHotel)
@@ -51,6 +51,17 @@ class TravelBug extends Component {
     API.updateWishlistedHotel(wishlistedHotel)
   }
 
+  changeWishlistItemNote = (wishlistedHotelId, note) => {
+    const wishlistedHotel = this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
+    const wishlistedHotels = this.state.hotelsInWunderlist
+    const wlhIndex = wishlistedHotels.indexOf(wishlistedHotel)
+    wishlistedHotel.note = note
+    wishlistedHotels[wlhIndex] = wishlistedHotel
+    this.setState({
+      hotelsInWunderlist: wishlistedHotels
+    })
+    API.updateWishlistedHotel(wishlistedHotel)
+  }
 
   removeHotelFromWunderlist = selectedHotel => {
     this.setState({
@@ -131,6 +142,7 @@ class TravelBug extends Component {
           <div>
             <Wishlist handleItemClick={this.handleItemClick} display={this.state.activeItem === "Wanderlist" ? true : false}
             changeWishlistItem={this.changeWishlistItem}
+            changeWishlistItemNote ={this.changeWishlistItemNote}
             hotelsInWunderlist={this.state.hotelsInWunderlist}
             addToWunderlist={this.addToWunderlist}
             removeHotelFromWunderlist={this.removeHotelFromWunderlist}
