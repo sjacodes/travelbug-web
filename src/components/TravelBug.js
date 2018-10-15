@@ -14,6 +14,7 @@ class TravelBug extends Component {
     activeItem: 'Home',
     hotelsInWunderlist: [],
     currentUser: undefined,
+    noteContent: ''
   }
   
   handleItemClick = (name) => this.setState({ activeItem: name }, () => window.scrollTo(0,0))
@@ -27,8 +28,29 @@ class TravelBug extends Component {
       hotelsInWunderlist: data,
       activeItem: "Wanderlist"
     }))
-    
   }
+
+  // updateNoteContent = (hotel) => {
+  //   API.insertURL(hotel, this.state.currentUser)
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({
+
+  //     }))
+  // }
+
+
+  changeWishlistItem = (wishlistedHotelId, item, itemIndex) => {
+    const wishlistedHotel = this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
+    const wishlistedHotels = this.state.hotelsInWunderlist
+    const wlhIndex = wishlistedHotels.indexOf(wishlistedHotel)
+    wishlistedHotel.checklist_items[itemIndex].checked = !wishlistedHotel.checklist_items[itemIndex].checked
+    wishlistedHotels[wlhIndex] = wishlistedHotel
+    this.setState({
+      hotelsInWunderlist: wishlistedHotels
+    })
+    API.updateWishlistedHotel(wishlistedHotel)
+  }
+
 
   removeHotelFromWunderlist = selectedHotel => {
     this.setState({
@@ -108,6 +130,7 @@ class TravelBug extends Component {
           </div>
           <div>
             <Wishlist handleItemClick={this.handleItemClick} display={this.state.activeItem === "Wanderlist" ? true : false}
+            changeWishlistItem={this.changeWishlistItem}
             hotelsInWunderlist={this.state.hotelsInWunderlist}
             addToWunderlist={this.addToWunderlist}
             removeHotelFromWunderlist={this.removeHotelFromWunderlist}

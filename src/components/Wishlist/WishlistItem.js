@@ -5,6 +5,8 @@ import './Wishlist.css'
 
 
 
+
+
 class WishlistItem extends Component {
   render () {
     return (
@@ -19,10 +21,10 @@ class WishlistItem extends Component {
             <Grid.Column  width={3} >
               <div className='wishlist-hotel-checklist'>
               {
-                this.props.hotel.checklist_items.map(item => {
+                this.props.hotel.checklist_items.map((item, i) => {
                   return (
                     <div style={{maxWidth: "100%", paddingLeft: "50px", paddingBottom: "18px"}}>
-                      <Checkbox label={item.content} />
+                      <Checkbox checked={item.checked} label={item.content} onChange={(event) => this.props.changeWishlistItem(this.props.hotel.id, item, i)}/>
                     </div>
                   )
                 })

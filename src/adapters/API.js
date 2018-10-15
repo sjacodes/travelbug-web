@@ -12,25 +12,6 @@ class API {
     }).then(resp => resp.json())
   }
 
-  // static validate (token) {
-  //   return fetch(API.validateURL, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: token
-  //     }
-  //   }).then(resp => resp.json())
-  // }
-
-  // static getItems () {
-  //   const token = localStorage.getItem('token')
-  //   return fetch(API.itemsURL, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: token
-  //     }
-  //   }).then(resp => resp.json())
-  // }
-
 
   static signup (email, password) {
     return fetch(API.signupURL, {
@@ -63,13 +44,44 @@ class API {
     })
   }
 
+  static updateWishlistedHotel (wishlistedHotel) {
+    return fetch(API.wishlistedHotels + '/' + wishlistedHotel.id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        note: wishlistedHotel.note,
+        checklist_items: wishlistedHotel.checklist_items
+      })
+    })
+  }
+
 }
 
 API.baseURL = 'http://localhost:3000'
 API.signinURL = API.baseURL + '/signin'
-API.validateURL = API.baseURL + '/validate'
-API.itemsURL = API.baseURL + '/items'
+// API.validateURL = API.baseURL + '/validate'
+// API.itemsURL = API.baseURL + '/items'
 API.signupURL = API.baseURL + '/signup'
 API.wishlistedHotels = API.baseURL + '/wishlisted_hotels'
 
 export default API
+
+
+ // static validate (token) {
+  //   return fetch(API.validateURL, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: token
+  //     }
+  //   }).then(resp => resp.json())
+  // }
+
+  // static getItems () {
+  //   const token = localStorage.getItem('token')
+  //   return fetch(API.itemsURL, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: token
+  //     }
+  //   }).then(resp => resp.json())
+  // }
