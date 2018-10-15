@@ -17,6 +17,14 @@ class SignUpForm extends Component {
       })
     }
 
+
+
+  handleClickOnSignUp = () => {
+    this.props.handleItemClick('Explore')
+    API.signup(this.state.email, this.state.password)
+      .then(resp => this.props.handleUser(resp))
+  }
+
   render () {
     return (
       <div className="sign-up-form">
@@ -30,7 +38,7 @@ class SignUpForm extends Component {
           <Form.Field>
             <input name='password' value={this.state.password} type='password' placeholder='Password' onChange={this.handleChange} />
           </Form.Field>
-          <button className="sign-in-button" onClick={() => API.signup(this.state.email, this.state.password).then(resp => this.props.handleUser(resp))} type='submit'>Sign Up</button>
+          <button className="sign-in-button" onClick={() => this.handleClickOnSignUp()} type='submit'>Sign Up</button>
         </Form>
         <br/>
         <br/>

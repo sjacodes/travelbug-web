@@ -18,6 +18,20 @@ class SignInForm extends Component {
       [e.target.name]: e.target.value
     })
   }
+
+
+  handleClickOnSignIn = () => {
+    this.props.handleItemClick('Explore')
+    API.signin(this.state.email, this.state.password)
+      .then(resp => this.props.handleUser(resp))
+  }
+
+
+
+  // API.signin(this.state.email, this.state.password).then(resp => this.props.handleUser(resp))}
+  // // onClick={() => this.props.handleItemClick('Sign In')}
+
+
   render () {
     return (
         <div className="sign-in-form">
@@ -31,7 +45,7 @@ class SignInForm extends Component {
             <Form.Field>
               <input name='password' value={this.state.password} type='password' placeholder='Password' onChange={this.handleChange} />
             </Form.Field>
-              <button className="sign-in-button" onClick={() => API.signin(this.state.email, this.state.password).then(resp => this.props.handleUser(resp))} type='submit'>Sign In</button>
+              <button className="sign-in-button" onClick={() => this.handleClickOnSignIn()} type='submit'>Sign In</button>
             </Form>
             <br/>
             <br/>

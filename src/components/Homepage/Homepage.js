@@ -13,12 +13,12 @@ class Homepage extends Component {
 
           <div className='content-1'>
             <video autoPlay loop muted className="myVideo" 
-            style={{ 
-              maxWidth: "100vw", 
+            style={{
+              maxWidth: "100vw",
               display: "block",
               maxHeight: "450px",
               marginLeft: "auto",
-              marginRight: "auto" 
+              marginRight: "auto"
             }}>
                 <source src={video} type="video/mp4"/>
             </video>
@@ -30,7 +30,7 @@ class Homepage extends Component {
                     <Image className="homepage-hotel-img" src={image}/>
                 </Grid.Column>
                 <Grid.Column>
-                  <div className="homepage-hotel-text-div-for-background-image"> 
+                  <div className="homepage-hotel-text-div-for-background-image">
                     <div className="homepage-hotel-text">
                       <div className="travel-bug-invites">
                         You are invited ...
@@ -38,8 +38,8 @@ class Homepage extends Component {
                       <div className="travel-bug-invites-body">
                         ... on a visual journey through the world's top 100 hotels. See something you like, add it to your wish list and always remember to think big!
                       </div>
-                      <button className="explore-hotels-btn" onClick={() => this.props.handleItemClick('Explore')}> 
-                        Start Exploring
+                      <button className="explore-hotels-btn" onClick={() => this.props.handleItemClick('Sign In')}>
+                        Create an account
                       </button>
                     </div>
                     </div>
@@ -56,8 +56,8 @@ class Homepage extends Component {
                       Never again will you be uninspired.
                     </div>
                     <div className="button-wrapper">
-                      <button className="set-up-your-account-button" onClick={() => this.props.handleItemClick('Sign In')}> 
-                          Set up your account
+                      <button className="set-up-your-account-button" onClick={() => this.props.handleItemClick('Explore')}>
+                          Start Exploring
                       </button>
                     </div>
                 </Grid.Column>
@@ -70,7 +70,7 @@ class Homepage extends Component {
               </Grid>
             </div>
           </div>
-          
+
         </div>
         )
   }

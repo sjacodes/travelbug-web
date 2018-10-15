@@ -22,8 +22,8 @@ class SignInPage extends Component {
     return (
       <div style={{display: this.props.display ? '' : 'none'}} className='sign-in-page'>
         <div className='forms'>
-          <SignInForm onSubmit={this.signIn} handleUser={this.props.handleUser} />
-          <SignUpForm onSubmit={this.signUp} handleUser={this.props.handleUser}/>
+          <SignInForm handleUser={this.props.handleUser} handleItemClick={this.props.handleItemClick}/>
+          <SignUpForm handleUser={this.props.handleUser} handleItemClick={this.props.handleItemClick}/>
         </div>
       </div>
     )
