@@ -32,6 +32,11 @@ class API {
     })
   }
 
+  static removeUsersWishlistedHotels (hotel) {
+    return fetch(API.wishlistedHotels + '/' + hotel.id, {
+      method: 'DELETE'
+    })
+  }
 
   static saveUsersWishlistedHotels (hotel, user) {
     return fetch(API.wishlistedHotels, {

@@ -30,16 +30,16 @@ class TravelBug extends Component {
     }))
   }
 
-  // updateNoteContent = (hotel) => {
-  //   API.insertURL(hotel, this.state.currentUser)
-  //     .then(resp => resp.json())
-  //     .then(data => this.setState({
 
-  //     }))
-  // }
+  removeHotelFromWunderlist = (selectedHotel) => {
+    this.setState({
+      hotelsInWunderlist: this.state.hotelsInWunderlist.filter(hotel => selectedHotel !== hotel),
+      activeItem: "Wanderlist"
+    })
+    API.removeUsersWishlistedHotels(selectedHotel, this.state.currentUser)
+  }
 
-
-  changeWishlistItem = (wishlistedHotelId, itemIndex) => {
+  changeWishlistItem = (wishlistedHotelId, item, itemIndex) => {
     const wishlistedHotel = this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
     const wishlistedHotels = this.state.hotelsInWunderlist
     const wlhIndex = wishlistedHotels.indexOf(wishlistedHotel)
@@ -63,12 +63,7 @@ class TravelBug extends Component {
     API.updateWishlistedHotel(wishlistedHotel)
   }
 
-  removeHotelFromWunderlist = selectedHotel => {
-    this.setState({
-      hotelsInWunderlist: this.state.hotelsInWunderlist.filter(hotel => selectedHotel !== hotel)
-    })
-  }
-
+ 
   hasHotelBeenAddedToWunderList = hotel => {
     return this.state.hotelsInWunderlist.includes(hotel)
   }
