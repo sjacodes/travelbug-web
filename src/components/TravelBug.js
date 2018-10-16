@@ -13,15 +13,17 @@ class TravelBug extends Component {
   state = {
     activeItem: 'Home',
     hotelsInWunderlist: [],
-    currentUser: undefined,
-    noteContent: ''
+    currentUser: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : undefined,
+    noteContent: '',
+    timer: undefined
   }
   
   handleItemClick = (name) => this.setState({ activeItem: name }, () => window.scrollTo(0,0))
 
 
   addToWunderlist = (hotel) => {
-    if (this.state.hotelsInWunderlist.includes(hotel)) return;
+    console.log(hotel)
+    if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
     API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
     .then(resp => resp.json())
     .then(data => this.setState({
@@ -52,20 +54,28 @@ class TravelBug extends Component {
   }
 
   changeWishlistItemNote = (wishlistedHotelId, note) => {
-    const wishlistedHotel = this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
-    const wishlistedHotels = this.state.hotelsInWunderlist
-    const wlhIndex = wishlistedHotels.indexOf(wishlistedHotel)
-    wishlistedHotel.note = note
-    wishlistedHotels[wlhIndex] = wishlistedHotel
     this.setState({
-      hotelsInWunderlist: wishlistedHotels
+      hotelsInWunderlist: this.state.hotelsInWunderlist.map(hotel => {
+        if (hotel.id !== wishlistedHotelId) return hotel
+        hotel.note = note
+        return hotel
+      })
     })
-    API.updateWishlistedHotel(wishlistedHotel)
+    if (this.state.timer != undefined) {
+      window.clearTimeout(this.state.timer)
+    }
+    this.setState({
+      timer: window.setTimeout(() => {
+        API.updateWishlistedHotel(
+          this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
+        )
+      }, 1000)
+    })
   }
 
  
   hasHotelBeenAddedToWunderList = hotel => {
-    return this.state.hotelsInWunderlist.includes(hotel)
+    return this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)
   }
 
   handleUser = (user) => {
@@ -82,6 +92,11 @@ class TravelBug extends Component {
           }))
       }
     )
+  }
+
+  logoutUser = () => {
+    this.setState({currentUser: undefined, hotelsInWunderlist: []})
+    window.localStorage.removeItem('user')
   }
 
   render () {
@@ -110,13 +125,24 @@ class TravelBug extends Component {
               active={this.state.activeItem === 'Wanderlist'}
               onClick={() => this.handleItemClick('Wanderlist')}
             />
-            <Menu.Item
-              className="menu-sign-in"
-              style={{marginRight: "22%", color: "white"}}
-              name="Sign In"
-              active={this.state.activeItem === 'Sign In'}
-              onClick={() => this.handleItemClick('Sign In')}
-            />
+            {
+              this.state.currentUser ?
+              <Menu.Item
+                className="menu-sign-in"
+                style={{marginRight: "22%", color: "white"}}
+                name="Sign Out"
+                active={false}
+                onClick={() => this.logoutUser('Sign Out')}
+              />
+              :
+              <Menu.Item
+                className="menu-sign-in"
+                style={{marginRight: "22%", color: "white"}}
+                name="Sign In"
+                active={this.state.activeItem === 'Sign In'}
+                onClick={() => this.handleItemClick('Sign In')}
+              />
+            }
           </Menu>
         </div>  
         <div className="travel-bug">
@@ -130,7 +156,7 @@ class TravelBug extends Component {
             <HotelList display={this.state.activeItem === "Explore" ? true : false}
               addToWunderlist={this.addToWunderlist}
               removeHotelFromWunderlist={this.removeHotelFromWunderlist}
-              hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
+              hasHotelBeenAddedToWunderList={this.hasHotelBeenAddedToWunderList}
               handleUser={this.handleUser} 
             />
           </div>
@@ -145,8 +171,11 @@ class TravelBug extends Component {
             />
           </div>
           <div>
-            <Homepage handleItemClick={this.handleItemClick} display={this.state.activeItem === "Home" ? true : false}/>
+            <Homepage handleItemClick={this.handleItemClick} logoutUser = {this.logoutUser} currentUser={this.state.currentUser} display={this.state.activeItem === "Home" ? true : false}/>
           </div>
+
+
+
           <div>
             <SignInPage handleUser={this.handleUser} handleItemClick={this.handleItemClick} display={this.state.activeItem === "Sign In" ? true : false}/>
           </div>

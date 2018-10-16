@@ -13,9 +13,10 @@ class WishlistItem extends Component {
       <Grid key={this.props.hotel.id}className="blade">
             <Grid.Column   width={5}>
               <div className='wishlist-hotel-image'>
-                <a className="wishlist-hotel-image" style={{paddingLeft: "40px"}} href={"http://" + this.props.hotel.website}> {this.props.hotel.name}, {this.props.hotel.city}</a>
+                <a className="wishlist-hotel-image" href={"http://" + this.props.hotel.website} style={{paddingLeft: "40px"}}> 
+                {this.props.hotel.name}, {this.props.hotel.city}
+                </a>
                 <img style={{maxWidth: "100%",  paddingTop: "20px", paddingLeft: "40px", paddingBottom: "50px"}} src={this.props.hotel.imageurl} alt=""/>
-                
               </div>           
             </Grid.Column>
             <Grid.Column  width={3} >

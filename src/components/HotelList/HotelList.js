@@ -31,13 +31,13 @@ class HotelList extends Component {
             We've got that travel bug and we are here to spread it. 
           </div>
           <div className='intro-body'>
-            Since all good holidays start with some inspiration, we've collated the world's best hotels to wet your appetite. <br/> Have a scroll, you know you want to.  And don't forget to add what you like to your wanderlist! 
+            Since all good holidays start with some inspiration, we've collated the world's best hotels to whet your appetite. <br/> Have a scroll, you know you want to.  And don't forget to add what you like to your wanderlist! 
           </div>
   
         < HotelCollection hotels={this.state.hotels} 
           addToWunderlist={this.props.addToWunderlist}
           removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}
-          hasHotelBeenAddedToWunderList={this.props.removeHotelFromWunderlist}
+          hasHotelBeenAddedToWunderList={this.props.hasHotelBeenAddedToWunderList}
           handleUser={this.props.handleUser} 
         />
       </div>
