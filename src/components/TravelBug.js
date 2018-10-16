@@ -101,7 +101,8 @@ class TravelBug extends Component {
 
   render () {
     return (
-      <div>
+      <>
+      <div style={{minHeight: 'calc(100vh - 75px)'}}>
         <div className='menu'>
           <Menu stackable pointing secondary>
             <Menu.Item
@@ -180,10 +181,11 @@ class TravelBug extends Component {
             <SignInPage handleUser={this.handleUser} handleItemClick={this.handleItemClick} display={this.state.activeItem === "Sign In" ? true : false}/>
           </div>
         </div>
-        <div className="site-footer">
-          © Sarah Jacob 2018
-        </div>
       </div>
+      <div className="site-footer">
+        © Sarah Jacob 2018
+      </div>
+      </>
     )
   }
 }

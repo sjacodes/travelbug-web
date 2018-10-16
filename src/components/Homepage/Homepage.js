@@ -48,27 +48,27 @@ class Homepage extends Component {
             </div>
           </div>
           <div className='content-3'>
-          <div className="third-box">
-              <Grid stackable columns={2}>
-                <Grid.Column>
-                    <Image className="homepage-hotel-img-third" src={image2}/>
-                    <div className="bottom-images-text">
-                      Never again will you be uninspired.
-                    </div>
-                    <div className="button-wrapper">
-                      <button className="set-up-your-account-button" onClick={() => this.props.handleItemClick('Explore')}>
-                          Start Exploring
-                      </button>
-                    </div>
-                </Grid.Column>
-                <Grid.Column>
-                    <Image className="homepage-hotel-img-third" src={image3}/>
-                    <div className="bottom-images-text">
-                      Stay organised & make sure you get what you want out of your holiday stay.
-                    </div>
-                </Grid.Column>
-              </Grid>
-            </div>
+            <div className="third-box">
+                <Grid stackable columns={2}>
+                  <Grid.Column>
+                      <Image className="homepage-hotel-img-third" src={image2}/>
+                      <div className="bottom-images-text">
+                        Never again will you be uninspired.
+                      </div>
+                      <div className="button-wrapper">
+                        <button className="set-up-your-account-button" onClick={() => this.props.handleItemClick('Explore')}>
+                            Start Exploring
+                        </button>
+                      </div>
+                  </Grid.Column>
+                  <Grid.Column>
+                      <Image className="homepage-hotel-img-third" src={image3}/>
+                      <div className="bottom-images-text">
+                        Stay organised & make sure you get what you want out of your holiday stay.
+                      </div>
+                  </Grid.Column>
+                </Grid>
+              </div>
           </div>
 
         </div>

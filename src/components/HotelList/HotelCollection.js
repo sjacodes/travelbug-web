@@ -4,6 +4,7 @@ import API from '../../adapters/API'
 
 
 
+
 class HotelCollection extends Component {
 
 
