@@ -13,26 +13,12 @@ import API from '../adapters/API'
 
 class TravelBug extends Component {
   state = {
-    activeItem: 'Home',
     hotelsInWunderlist: [],
     currentUser: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : undefined,
     noteContent: '',
     timer: undefined
   }
   
-  handleItemClick = (name) => this.setState({ activeItem: name }, () => {
-    window.scrollTo(0,0)
-    if (name === 'Sign In') {
-      this.props.history.push('/myaccount')
-    }
-    else if (name === 'Explore') {
-      this.props.history.push('/explore')
-    } 
-    else if (name === 'Wishlist') {
-      this.props.history.push('/wanderlist')
-    }
-  })
-
 
   addToWunderlist = (hotel) => {
     console.log(hotel)
@@ -42,6 +28,7 @@ class TravelBug extends Component {
     .then(data => this.setState({
       hotelsInWunderlist: data
         }))
+    
   }
 
   removeHotelFromWunderlist = (selectedHotel) => {
@@ -90,6 +77,7 @@ class TravelBug extends Component {
   }
 
   handleUser = (user) => {
+    console.log(user)
     window.localStorage.setItem('user', JSON.stringify(user))
     this.setState(
       {
@@ -110,6 +98,15 @@ class TravelBug extends Component {
     window.localStorage.removeItem('user')
   }
 
+  activeItem = () => {
+    return {
+      '/': "HOME",
+      '/explore': "EXPLORE",
+      '/wanderlist': "WANDERLIST",
+      '/myaccount': "SIGN IN",
+    }[this.props.location.pathname]
+  }
+
   render () {
     return (
     <div>
@@ -121,28 +118,27 @@ class TravelBug extends Component {
                   to='/'
                   className="menu-option"
                   name="Home"
-                  active={this.state.activeItem === 'Home'}
-                  onClick={() => this.handleItemClick('Home')}
+                  active={this.activeItem() === 'HOME'}
                 />
               <Menu.Item
                 as={Link}
                 to='/explore'
                 className="menu-option"
                 name="Explore"
-                active={this.state.activeItem === 'Explore'}
-                onClick={() => this.handleItemClick('Explore')}
+                active={this.activeItem() === 'EXPLORE'}
               />
               <Menu.Item
                 as={Link}
                 to='/wanderlist'
                 className="menu-option"
                 name="Wanderlist"
-                active={this.state.activeItem === 'Wanderlist'}
-                onClick={() => this.handleItemClick('Wanderlist')}
+                active={this.activeItem() === 'WANDERLIST'}
               />
             {
               this.state.currentUser ?
               <Menu.Item
+                as={Link}
+                to='/myaccount'
                 className="menu-option"
                 style={{marginRight: "22%", color: "white"}}
                 name="Sign Out"
@@ -155,8 +151,7 @@ class TravelBug extends Component {
                 to='/myaccount'
                 className="menu-option"
                 name="Sign In"
-                active={this.state.activeItem === 'Sign In'}
-                onClick={() => this.handleItemClick('Sign In')}
+                active={this.activeItem() === 'SIGN IN'}
               />
             }
           </Menu>
@@ -164,33 +159,31 @@ class TravelBug extends Component {
           <div className="travel-bug">
             TRAVEL BUG
           </div> 
-          <div className="travel-title" style={{display: this.state.activeItem !== "Home" ? '' : 'none'}}>
-            {this.state.activeItem}
+          <div className="travel-title" style={{display: this.props.location.pathname !== "/" ? 'block' : 'none'}}>
+            {this.activeItem()}
           </div> 
                 <div className="background-home">
               <div>
                 <Switch>
-                  <Route exact path='/' component={props => <Homepage handleItemClick={this.handleItemClick} 
+                  <Route exact path='/' render={props => <Homepage handleItemClick={this.handleItemClick} 
                         logoutUser = {this.logoutUser} currentUser={this.state.currentUser} 
-                        display={this.state.activeItem === "Home" ? true : false} {...props} />} />
-                  <Route exact path='/explore' component={props => <HotelList 
-                        display={this.state.activeItem === "Explore" ? true : false}
+                   />} />
+                  <Route exact path='/explore' render={props => <HotelList 
                         addToWunderlist={this.addToWunderlist}
                         removeHotelFromWunderlist={this.removeHotelFromWunderlist}
                         hasHotelBeenAddedToWunderList={this.hasHotelBeenAddedToWunderList}
                         handleUser={this.handleUser}  {...props} />} />
-                  <Route exact path='/wanderlist' component={props => <Wishlist
-                      handleItemClick={this.handleItemClick} display={this.state.activeItem === "Wanderlist" ? true : false}
+                  <Route exact path='/wanderlist' render={props => <Wishlist
                       changeWishlistItem={this.changeWishlistItem}
                       changeWishlistItemNote ={this.changeWishlistItemNote}
                       hotelsInWunderlist={this.state.hotelsInWunderlist}
                       addToWunderlist={this.addToWunderlist}
                       removeHotelFromWunderlist={this.removeHotelFromWunderlist}
                       hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
+                      handleUser={this.handleUser}  
                       {...props} />} />  
-                  <Route exact path='/myaccount' component={props => <SignInPage 
-                          handleUser={this.handleUser} handleItemClick={this.handleItemClick} 
-                          display={this.state.activeItem === "Sign In" ? true : false}
+                  <Route exact path='/myaccount' render={props => <SignInPage 
+                          handleUser={this.handleUser}  
                         {...props} />} />
                 </Switch>
               </div>

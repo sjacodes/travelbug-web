@@ -21,11 +21,9 @@ class HotelList extends Component {
     this.getHotels()
   }
 
-
-
   render () {
     return (
-    <div style={{display: this.props.display ? '' : 'none'}} className='hotel-list'>
+    <div className='hotel-list'>
       <div className='intro-to-hotels'>
           <div className='intro-header'>
             We've got that travel bug and we are here to spread it. 

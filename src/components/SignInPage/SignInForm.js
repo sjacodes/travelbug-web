@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
 import './SignInPage.css'
 import API from '../../adapters/API'
+import { Link } from "react-router-dom";
+
 
 
 
@@ -21,15 +23,12 @@ class SignInForm extends Component {
 
 
   handleClickOnSignIn = () => {
-    this.props.handleItemClick('Explore')
     API.signin(this.state.email, this.state.password)
       .then(resp => this.props.handleUser(resp))
   }
 
 
 
-  // API.signin(this.state.email, this.state.password).then(resp => this.props.handleUser(resp))}
-  // // onClick={() => this.props.handleItemClick('Sign In')}
 
 
   render () {
@@ -45,7 +44,9 @@ class SignInForm extends Component {
             <Form.Field>
               <input name='password' value={this.state.password} type='password' placeholder='Password' onChange={this.handleChange} />
             </Form.Field>
-              <button className="sign-in-button" onClick={() => this.handleClickOnSignIn()} type='submit'>Sign In</button>
+              <Link to='/explore'>
+                <button className="sign-in-button" onClick={() => this.handleClickOnSignIn()} type='submit'>Sign In</button>
+              </Link>
             </Form>
             <br/>
             <br/>

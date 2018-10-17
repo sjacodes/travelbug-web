@@ -10,7 +10,7 @@ import './Wishlist.css'
 class WishlistItem extends Component {
   render () {
     return (
-      <Grid key={this.props.hotel.id}className="blade">
+      <Grid key={this.props.hotel.id} className="blade">
             <Grid.Column   width={5}>
               <div className='wishlist-hotel-image'>
                 <a className="wishlist-hotel-image" href={"http://" + this.props.hotel.website} style={{paddingLeft: "40px"}}> 

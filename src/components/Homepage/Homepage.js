@@ -5,11 +5,13 @@ import image2 from '../../Assets/BottomBladeImage1.jpg';
 import image3 from '../../Assets/BottomBladeImage2.jpg';
 import { Image, Grid } from 'semantic-ui-react'
 import './Homepage.css'
+import { Link } from "react-router-dom";
+
 
 class Homepage extends Component {
   render () {
     return (
-        <div style={{display: this.props.display ? '' : 'none'}} className='homepage'>
+        <div className='homepage'>
 
           <div className='content-1'>
             <video autoPlay loop muted className="myVideo" 
@@ -38,9 +40,11 @@ class Homepage extends Component {
                       <div className="travel-bug-invites-body">
                         ... on a visual journey through the world's top 100 hotels. See something you like, add it to your wish list and always remember to think big!
                       </div>
-                      <button className="explore-hotels-btn" onClick={() => this.props.handleItemClick('Sign In')}>
-                        Create an account
-                      </button>
+                      <Link to='/myaccount'>
+                        <button className="explore-hotels-btn" >
+                          Create an account
+                        </button>
+                      </Link>
                     </div>
                     </div>
                 </Grid.Column>
@@ -56,9 +60,11 @@ class Homepage extends Component {
                         Never again will you be uninspired.
                       </div>
                       <div className="button-wrapper">
-                        <button className="set-up-your-account-button" onClick={() => this.props.handleItemClick('Explore')}>
+                      <Link to='/explore'>
+                        <button className="set-up-your-account-button">
                             Start Exploring
                         </button>
+                      </Link>
                       </div>
                   </Grid.Column>
                   <Grid.Column>
