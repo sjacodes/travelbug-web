@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './HotelList.css'
-import API from '../../adapters/API'
 
 
 
@@ -13,14 +12,16 @@ class HotelCollection extends Component {
     <div className='hotel-collection'>
         {
          this.props.hotels.map(hotel =>
-          <p key={hotel.id}>
+          <div key={hotel.id}>
             <img src={hotel.imageurl} alt=""/>
             <br/>
             <br/>
             <a className="hotel-list-image-heading" href={"http://" + hotel.website} >
               {hotel.name}
             </a>
-            <p className="hotel-list-image-city-and-country">{hotel.city} | {hotel.country} </p> 
+            <p className="hotel-list-image-city-and-country">
+              {hotel.city} | {hotel.country} 
+            </p> 
             {
               this.props.hasHotelBeenAddedToWunderList(hotel) ? 
               <button className="hotel-list-add-to-wishlist-buttons" style={{ color: "#f2e4df", opacity: "0.5"}} >
@@ -31,7 +32,7 @@ class HotelCollection extends Component {
                 Add to Wanderlist
               </button>
             }
-          </p>
+          </div>
         )
         }
     </div>

@@ -24,7 +24,7 @@ class WishlistItem extends Component {
               {
                 this.props.hotel.checklist_items.map((item, i) => {
                   return (
-                    <div style={{maxWidth: "100%", paddingLeft: "50px", paddingBottom: "18px"}}>
+                    <div key={i} style={{maxWidth: "100%", paddingLeft: "50px", paddingBottom: "18px"}}>
                       <Checkbox checked={item.checked} label={item.content} onChange={(event) => this.props.changeWishlistItem(this.props.hotel.id, item, i)}/>
                     </div>
                   )

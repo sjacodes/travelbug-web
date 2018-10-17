@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Grid, Checkbox, Form, TextArea } from 'semantic-ui-react'
 import './Wishlist.css'
 import WishlistItem from './WishlistItem'
 import { Link } from "react-router-dom";
@@ -17,7 +16,7 @@ class Wishlist extends Component {
           This is yours.
         </div>
           { this.props.hotelsInWunderlist.map((hotel => 
-            < WishlistItem 
+            < WishlistItem key={hotel.id}
               hotel={hotel}
               changeWishlistItem={this.props.changeWishlistItem}
               changeWishlistItemNote={this.props.changeWishlistItemNote}

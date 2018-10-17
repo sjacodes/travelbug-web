@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
 import './SignInPage.css'
-import LogOutForm from './LogOutForm'
 
 
 class SignInPage extends Component {

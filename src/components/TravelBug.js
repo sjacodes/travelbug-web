@@ -59,7 +59,7 @@ class TravelBug extends Component {
         return hotel
       })
     })
-    if (this.state.timer != undefined) {
+    if (this.state.timer !== undefined) {
       window.clearTimeout(this.state.timer)
     }
     this.setState({
