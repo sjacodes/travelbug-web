@@ -3,21 +3,10 @@
   background-color: black
 }
 
-.menu-home {
+.menu-option {
+  margin-right: 22.5% !important;
   text-transform: uppercase !important;
-  color: white;
-}
-.menu-hotels-list {
-  text-transform: uppercase !important;
-  color: white;
-}
-.menu-wishlist {
-  text-transform: uppercase !important;
-  color: white;
-}
-.menu-sign-in {
-  text-transform: uppercase !important;
-  color: white;
+  color: white !important;
 }
 
 .ui.secondary.pointing.menu .active.item {
