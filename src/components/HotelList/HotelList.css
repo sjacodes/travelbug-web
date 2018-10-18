@@ -47,6 +47,7 @@
   font-size: 12px;
   margin-bottom: 40px;
   display: inline-block;
+  animation-duration: 1s;
 }
 
 
@@ -54,7 +55,30 @@
   color: #f2e4df;
   opacity: 0.5;
 }
+/* 
+.animated-bounce {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+} */
 
+.pop-up-button {
+  color: white;
+  font-family: SackersGothicStd-Heavy, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  padding: 10px 30px;
+  background-color: #f2e4df;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 40px;
+  display: inline-block;
+}
 .intro-header {
   font-family: 'Playfair Display', serif;
   font-size: 24px;

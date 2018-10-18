@@ -34,6 +34,11 @@ class Wishlist extends Component {
             </button>
           </Link>
         </div>
+        <div className="wrapper">
+            <button className="export-wanderlist-button" > 
+              Export Wanderlist
+            </button>
+        </div>
       </div>
         )
   }

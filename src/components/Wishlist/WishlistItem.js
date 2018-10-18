@@ -8,6 +8,13 @@ import './Wishlist.css'
 
 
 class WishlistItem extends Component {
+
+  animateButton = (event, hotel) => {
+    event.target.classList.add('animated', 'bounceOut')
+    this.props.removeHotelFromWunderlist(hotel)
+  }
+
+
   render () {
     return (
       <Grid key={this.props.hotel.id} className="blade">

@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import './HotelList.css'
+import {Popup} from 'semantic-ui-react'
 
 
 
 
 class HotelCollection extends Component {
 
+  pulseButton = (event, hotel) => {
+    event.target.classList.add('animated', 'rubberBand')
+    this.props.addToWunderlist(hotel)
+  }
 
   render () {
   	return (
@@ -28,9 +33,9 @@ class HotelCollection extends Component {
                 Added to Wanderlist
               </button>
               :
-              <button className="hotel-list-add-to-wishlist-buttons" onClick={() => this.props.addToWunderlist(hotel)}>
-                Add to Wanderlist
-              </button>
+                <button className="hotel-list-add-to-wishlist-buttons" onClick={event => this.pulseButton(event, hotel)}>
+                  Add to Wanderlist
+                </button>
             }
           </div>
         )
