@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 
 
 class Wishlist extends Component {
+
+  componentDidMount = () => {
+    if (this.props.hotelsInWunderlist.length === 0 && !!this.props.currentUser) {
+      this.props.updateWanderlist()
+    }
+  }
+
   render () {
     return (
     
@@ -15,6 +22,21 @@ class Wishlist extends Component {
           <br/>
           This is yours.
         </div>
+
+        { !this.props.currentUser &&
+          <div>
+            <div className="dont-lose">
+              <p > Don't want to lose that wanderlist of yours? </p>
+            </div>
+            <div className="wrapper">
+              <Link to='/myaccount'>
+                 <button className="back-to-hotel-list"> Sign up now </button>
+              </Link>
+            </div>
+          </div>
+        }
+
+
           { this.props.hotelsInWunderlist.map((hotel => 
             < WishlistItem key={hotel.id}
               hotel={hotel}
@@ -27,6 +49,8 @@ class Wishlist extends Component {
               />
           ))}
 
+       
+
         <div className="wrapper">
           <Link to='/explore'>
             <button className="back-to-hotel-list" > 
@@ -34,11 +58,11 @@ class Wishlist extends Component {
             </button>
           </Link>
         </div>
-        <div className="wrapper">
+        {/* <div className="wrapper">
             <button className="export-wanderlist-button" > 
               Export Wanderlist
             </button>
-        </div>
+        </div> */}
       </div>
         )
   }

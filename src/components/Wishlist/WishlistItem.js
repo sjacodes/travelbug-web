@@ -9,11 +9,12 @@ import './Wishlist.css'
 
 class WishlistItem extends Component {
 
-  animateButton = (event, hotel) => {
+
+  bounceOutButton = (event, hotel) => {
     event.target.classList.add('animated', 'bounceOut')
     this.props.removeHotelFromWunderlist(hotel)
   }
-
+  //this doesnt seem to work...its something to do with hotel being undefined?
 
   render () {
     return (
@@ -53,9 +54,9 @@ class WishlistItem extends Component {
             <Grid.Column  width={3}> 
               <div>
                 <div style={{maxWidth: "100%"}}>
-                  <button className='remove-from-wishlist-button' onClick={() => this.props.removeHotelFromWunderlist(this.props.hotel)}>
-                  Not feeling this hotel anymore...let's remove it.
-                </button>
+                  <button className='remove-from-wishlist-button' onClick={(event) => this.bounceOutButton(event, this.props.hotel)}>
+                     Not feeling this hotel anymore...let's remove it.
+                  </button>
                 </div>
               </div>
             </Grid.Column>

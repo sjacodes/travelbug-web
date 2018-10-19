@@ -7,7 +7,6 @@ import { Image, Grid } from 'semantic-ui-react'
 import './Homepage.css'
 import { Link } from "react-router-dom";
 
-
 class Homepage extends Component {
   render () {
     return (

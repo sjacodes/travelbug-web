@@ -20,16 +20,72 @@ class TravelBug extends Component {
   }
   
 
-  addToWunderlist = (hotel) => {
-    console.log(hotel)
-    if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
-    API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
-    .then(resp => resp.json())
-    .then(data => this.setState({
-      hotelsInWunderlist: data
-        }))
+  // addToWunderlist = (hotel) => {
+  //   if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
+  //   API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
+  //   .then(resp => resp.json())
+  //   .then(data => this.setState({
+  //     hotelsInWunderlist: data
+  //       }))
     
+  // }
+
+  updateWanderlist = () => {
+    API.fetchWishlist(this.state.currentUser)
+      .then(resp => resp.json())
+      .then(data => this.setState({
+        hotelsInWunderlist: data
+      }))
   }
+
+  addToWunderlist = (hotel) => {
+    if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
+    if (this.state.currentUser !== undefined) {
+      API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
+      .then(resp => resp.json())
+      .then(data => this.setState({
+      hotelsInWunderlist: data }))
+    } else {
+      this.setState({
+        hotelsInWunderlist: [...this.state.hotelsInWunderlist, this.convertHotelToWishlistedHotel(hotel)]
+      })
+    }
+  }
+
+  convertHotelToWishlistedHotel = hotel => {
+
+    return {
+      hotel_id: hotel.id,
+      imageurl: hotel.imageurl,
+      note: '',
+      city: hotel.city,
+      name: hotel.name,
+      website: hotel.website,
+      checklist_items: [
+        {
+          checked: false,
+          content: 'Late checkout available'
+        },
+        {
+          checked: false,
+          content: 'Airport transfer available on request'
+        },
+        {
+          checked: false,
+          content: 'Offers packages, deals and discounts'
+        },
+        {
+          checked: false,
+          content: 'Has availability for my prefered dates'
+        },
+        {
+          checked: false,
+          content: 'Is within my price range'
+        }        
+      ]
+    }
+  }
+
 
   removeHotelFromWunderlist = (selectedHotel) => {
     this.setState({
@@ -181,6 +237,8 @@ class TravelBug extends Component {
                       removeHotelFromWunderlist={this.removeHotelFromWunderlist}
                       hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
                       handleUser={this.handleUser}  
+                      currentUser={this.state.currentUser}
+                      updateWanderlist={this.updateWanderlist}
                       {...props} />} />  
                   <Route exact path='/myaccount' render={props => <SignInPage 
                           handleUser={this.handleUser}  
@@ -193,7 +251,7 @@ class TravelBug extends Component {
 
 
       <div className="site-footer">
-        © Sarah Jacob 2018
+        © Sam Barker 2018
       </div>
     </div>
     )
