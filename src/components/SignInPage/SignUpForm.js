@@ -23,14 +23,16 @@ class SignUpForm extends Component {
 
   handleClickOnSignUp = () => {
     API.signup(this.state.email, this.state.password)
-      .then(resp => this.props.handleUser(resp))
+      .then(resp => {
+        this.props.handleUser(resp, { signup: true})
+      })
   }
 
   render () {
     return (
       <div className="sign-up-form">
         <div className="sign-up-header"> 
-          Don't have an account with us. Create one now! 
+          Don't have an account with us. <b>Create one</b> now! 
         </div>
         <Form className="sign-up-form">
           <Form.Field>
@@ -44,6 +46,9 @@ class SignUpForm extends Component {
           </Link>
         </Form>
         <br/>
+        <div className="or">
+          OR...
+        </div>
         <br/>
       </div>
     )

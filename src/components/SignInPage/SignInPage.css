@@ -6,13 +6,13 @@
 
 .sign-in-header {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 3;
 }
 
 .sign-up-header {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 3;
   margin-top: 20px;
 }
@@ -20,8 +20,8 @@
 
 .or {
   font-family: 'Playfair Display', serif;
-  font-size: 34px;
-  color: pink;
+  font-size: 27px;
+  color: black;
 
 }
 
@@ -87,4 +87,11 @@
   font-size: 12px;
   margin-bottom: 40px;
   display: inline-block;
+}
+
+.sign-in-div-for-background-image {
+  background-image: url("../../Assets/feature-brush.png");
+  background-repeat: no-repeat;
+  background-size: 580px;
+  background-position: center
 }

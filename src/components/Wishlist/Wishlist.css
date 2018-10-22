@@ -48,7 +48,7 @@
   text-transform: uppercase;
   font-size: 12px;
   display: inline-block;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 
 }
 
@@ -146,4 +146,9 @@
   margin-bottom: 35px;
   display: inline-block;
   max-width: 100%;
+}
+
+.ui.grid.blade {
+    margin-top: 0;
+    margin-bottom: 0;
 }

@@ -53,7 +53,6 @@ class TravelBug extends Component {
   }
 
   convertHotelToWishlistedHotel = hotel => {
-
     return {
       hotel_id: hotel.id,
       imageurl: hotel.imageurl,
@@ -129,10 +128,10 @@ class TravelBug extends Component {
 
  
   hasHotelBeenAddedToWunderList = hotel => {
-    return this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)
+    return this.state.hotelsInWunderlist && this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)
   }
 
-  handleUser = (user) => {
+  handleUser = (user, options = { signup: false}) => {
     console.log(user)
     window.localStorage.setItem('user', JSON.stringify(user))
     this.setState(
@@ -140,11 +139,22 @@ class TravelBug extends Component {
         currentUser: {email: user.email, id: user.id}
       },
       () => {
-        API.fetchWishlist(this.state.currentUser)
-          .then(res => res.json())
-          .then(data => this.setState({
-            hotelsInWunderlist: data
-          }))
+        if (options.signup) {
+          API.saveUsersWishlistedHotels(
+            this.state.hotelsInWunderlist,
+            user
+          )
+            .then(res => res.json())
+            .then(data => this.setState({
+              hotelsInWunderlist: data
+            }))
+        } else {
+          API.fetchWishlist(this.state.currentUser)
+            .then(res => res.json())
+            .then(data => this.setState({
+              hotelsInWunderlist: data
+            }))
+        }
       }
     )
   }

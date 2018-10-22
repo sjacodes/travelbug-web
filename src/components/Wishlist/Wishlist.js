@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './Wishlist.css'
 import WishlistItem from './WishlistItem'
 import { Link } from "react-router-dom";
+import { Transition } from 'react-spring'
+
 
 
 
@@ -36,18 +38,28 @@ class Wishlist extends Component {
           </div>
         }
 
+        <div id='list'>
+          <Transition
+            keys={this.props.hotelsInWunderlist.map(hotel => hotel.id)}
+            from={{ opacity: 0, height: 0 }}
+            enter={{ opacity: 1, height: 'auto' }}
+            leave={{ opacity: 0, height: 0, pointerEvents: 'none', border: 'none' }}>
 
-          { this.props.hotelsInWunderlist.map((hotel => 
-            < WishlistItem key={hotel.id}
-              hotel={hotel}
-              changeWishlistItem={this.props.changeWishlistItem}
-              changeWishlistItemNote={this.props.changeWishlistItemNote}
-              hotelsInWunderlist={this.props.hotelsInWunderlist}
-              addToWunderlist={this.props.addToWunderlist}
-              removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}
-              hasHotelBeenAddedToWunderList={this.props.removeHotelFromWunderlist}
-              />
-          ))}
+                { this.props.hotelsInWunderlist.map((hotel  => styles =>
+                  < WishlistItem key={hotel.id}
+                    hotel={hotel}
+                    styles={styles}
+                    changeWishlistItem={this.props.changeWishlistItem}
+                    changeWishlistItemNote={this.props.changeWishlistItemNote}
+                    hotelsInWunderlist={this.props.hotelsInWunderlist}
+                    addToWunderlist={this.props.addToWunderlist}
+                    removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}
+                    hasHotelBeenAddedToWunderList={this.props.hasHotelBeenAddedToWunderList}
+                    />
+                ))}
+          </Transition>
+
+        </div>
 
        
 

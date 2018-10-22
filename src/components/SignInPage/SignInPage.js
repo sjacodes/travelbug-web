@@ -6,23 +6,15 @@ import './SignInPage.css'
 
 class SignInPage extends Component {
 
-  // signIn(email, password) {
-  //   API.signIn(email,password)
-  //     .then(userData => {
-  //       this.props.setCurrentUser(userData)
-  //     })
-  // }
-
-  // signUp () {
-
-  // }
 
   render() {
     return (
       <div className='sign-in-page'>
-        <div className='forms'>
-          <SignInForm handleUser={this.props.handleUser} />
-          <SignUpForm handleUser={this.props.handleUser} />
+        <div className="sign-in-div-for-background-image">
+          <div className='forms'>
+            <SignUpForm handleUser={this.props.handleUser} />
+            <SignInForm handleUser={this.props.handleUser} />
+          </div>
         </div>
       </div>
     )
