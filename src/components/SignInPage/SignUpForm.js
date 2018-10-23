@@ -27,6 +27,7 @@ class SignUpForm extends Component {
       .then(resp => {
         this.props.handleUser(resp, { signup: true})
       })
+      .then(() => this.props.history.push('/explore'))
       .catch(resp => {
         resp.json()
           .then(data => {
@@ -35,7 +36,6 @@ class SignUpForm extends Component {
             })
           })
       })
-      .then(() => this.props.history.push('/explore'))
   }
 
   render () {
