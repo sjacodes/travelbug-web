@@ -86,8 +86,8 @@ class TravelBug extends Component {
     API.removeUsersWishlistedHotels(selectedHotel, this.state.currentUser)
   }
 
-  changeWishlistItem = (wishlistedHotelId, item, itemIndex) => {
-    const wishlistedHotel = this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
+  changeWishlistItem = (hotel_id, item, itemIndex) => {
+    const wishlistedHotel = this.state.hotelsInWunderlist.find(hotel => hotel.hotel_id === hotel_id)
     const wishlistedHotels = this.state.hotelsInWunderlist
     const wlhIndex = wishlistedHotels.indexOf(wishlistedHotel)
     wishlistedHotel.checklist_items[itemIndex].checked = !wishlistedHotel.checklist_items[itemIndex].checked
@@ -98,10 +98,10 @@ class TravelBug extends Component {
     API.updateWishlistedHotel(wishlistedHotel)
   }
 
-  changeWishlistItemNote = (wishlistedHotelId, note) => {
+  changeWishlistItemNote = (hotelId, note) => {
     this.setState({
       hotelsInWunderlist: this.state.hotelsInWunderlist.map(hotel => {
-        if (hotel.id !== wishlistedHotelId) return hotel
+        if (hotel.hotel_id !== hotelId) return hotel
         hotel.note = note
         return hotel
       })
@@ -112,7 +112,7 @@ class TravelBug extends Component {
     this.setState({
       timer: window.setTimeout(() => {
         API.updateWishlistedHotel(
-          this.state.hotelsInWunderlist.find(hotel => hotel.id === wishlistedHotelId)
+          this.state.hotelsInWunderlist.find(hotel => hotel.hotel_id === hotelId)
         )
       }, 1000)
     })

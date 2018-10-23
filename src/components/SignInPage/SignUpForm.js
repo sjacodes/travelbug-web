@@ -26,16 +26,16 @@ class SignUpForm extends Component {
     API.signup(this.state.email, this.state.password)
       .then(resp => {
         this.props.handleUser(resp, { signup: true})
-        // go to /explore
       })
-      .catch(res => {
-        res.json()
+      .catch(resp => {
+        resp.json()
           .then(data => {
             this.setState({
               errors: data.error
             })
           })
       })
+      .then(() => this.props.history.push('/explore'))
   }
 
   render () {

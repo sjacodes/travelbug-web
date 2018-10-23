@@ -28,7 +28,7 @@ class Wishlist extends Component {
         { !this.props.currentUser &&
           <div>
             <div className="dont-lose">
-              <p > Don't want to lose that wanderlist of yours? </p>
+              <p > Don't want to lose your wanderlist? </p>
             </div>
             <div className="wrapper">
               <Link to='/myaccount'>

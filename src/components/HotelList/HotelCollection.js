@@ -21,7 +21,7 @@ class HotelCollection extends Component {
             <img src={hotel.imageurl} alt=""/>
             <br/>
             <br/>
-            <a className="hotel-list-image-heading" href={"http://" + hotel.website} >
+              <a className="hotel-list-image-heading" href={"http://" + hotel.website} target="_blank">
               {hotel.name}
             </a>
             <p className="hotel-list-image-city-and-country">

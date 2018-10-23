@@ -12,7 +12,7 @@ class SignInPage extends Component {
       <div className='sign-in-page'>
         <div className="sign-in-div-for-background-image">
           <div className='forms'>
-            <SignUpForm handleUser={this.props.handleUser} />
+            <SignUpForm handleUser={this.props.handleUser} history={this.props.history} />
             <SignInForm handleUser={this.props.handleUser} />
           </div>
         </div>
