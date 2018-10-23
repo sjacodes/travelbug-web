@@ -10,7 +10,8 @@ class SignUpForm extends Component {
 
     state = {
       email: '',
-      password: ''
+      password: '',
+      errors: []
     }
 
     handleChange = (e) => {
@@ -25,6 +26,15 @@ class SignUpForm extends Component {
     API.signup(this.state.email, this.state.password)
       .then(resp => {
         this.props.handleUser(resp, { signup: true})
+        // go to /explore
+      })
+      .catch(res => {
+        res.json()
+          .then(data => {
+            this.setState({
+              errors: data.error
+            })
+          })
       })
   }
 
@@ -34,6 +44,15 @@ class SignUpForm extends Component {
         <div className="sign-up-header"> 
           Don't have an account with us. <b>Create one</b> now! 
         </div>
+        {
+          this.state.errors.length > 0 && (
+            <div className="sign-up-errors">
+              {
+                this.state.errors.map(e => <p>{e}</p>)
+              }
+           </div>
+          )
+        }
         <Form className="sign-up-form">
           <Form.Field>
             <input name='email' value={this.state.email} placeholder='Email' onChange={this.handleChange} />
@@ -41,9 +60,7 @@ class SignUpForm extends Component {
           <Form.Field>
             <input name='password' value={this.state.password} type='password' placeholder='Password' onChange={this.handleChange} />
           </Form.Field>
-          <Link to='/explore'>
           <button className="sign-in-button" onClick={() => this.handleClickOnSignUp()} type='submit'>Sign Up</button>
-          </Link>
         </Form>
         <br/>
         <div className="or">

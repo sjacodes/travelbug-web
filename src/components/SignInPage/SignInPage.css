@@ -7,13 +7,13 @@
 .sign-in-header {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
-  line-height: 3;
+  line-height: 2;
 }
 
 .sign-up-header {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
-  line-height: 3;
+  line-height: 2;
   margin-top: 20px;
 }
 
@@ -94,4 +94,12 @@
   background-repeat: no-repeat;
   background-size: 580px;
   background-position: center
+}
+
+.sign-up-errors {
+  color: red;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-style: normal;
+  letter-spacing: 0.1em;
 }

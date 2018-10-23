@@ -40,13 +40,14 @@ class Wishlist extends Component {
 
         <div id='list'>
           <Transition
-            keys={this.props.hotelsInWunderlist.map(hotel => hotel.id)}
+            keys={this.props.hotelsInWunderlist.map(hotel => hotel.hotel_id)}
             from={{ opacity: 0, height: 0 }}
             enter={{ opacity: 1, height: 'auto' }}
             leave={{ opacity: 0, height: 0, pointerEvents: 'none', border: 'none' }}>
 
                 { this.props.hotelsInWunderlist.map((hotel  => styles =>
-                  < WishlistItem key={hotel.id}
+                  < WishlistItem 
+                    key={hotel.hotel_id}
                     hotel={hotel}
                     styles={styles}
                     changeWishlistItem={this.props.changeWishlistItem}

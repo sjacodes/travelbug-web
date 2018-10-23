@@ -21,7 +21,13 @@ class API {
         email: email,
         password: password
       })
-    }).then(resp => resp.json())
+    }).then(resp => {
+      if (resp.ok) {
+        return resp.json()
+      } else {
+        return Promise.reject(resp)
+      }
+    })
   }
 
 
@@ -50,6 +56,7 @@ class API {
   }
 
   static updateWishlistedHotel (wishlistedHotel) {
+    if (wishlistedHotel.id == undefined) return;
     return fetch(API.wishlistedHotels + '/' + wishlistedHotel.id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json'},

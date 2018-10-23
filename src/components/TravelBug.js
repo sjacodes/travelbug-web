@@ -18,17 +18,7 @@ class TravelBug extends Component {
     noteContent: '',
     timer: undefined
   }
-  
 
-  // addToWunderlist = (hotel) => {
-  //   if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
-  //   API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
-  //   .then(resp => resp.json())
-  //   .then(data => this.setState({
-  //     hotelsInWunderlist: data
-  //       }))
-    
-  // }
 
   updateWanderlist = () => {
     API.fetchWishlist(this.state.currentUser)
@@ -44,7 +34,8 @@ class TravelBug extends Component {
       API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
       .then(resp => resp.json())
       .then(data => this.setState({
-      hotelsInWunderlist: data }))
+        hotelsInWunderlist: data })
+      )
     } else {
       this.setState({
         hotelsInWunderlist: [...this.state.hotelsInWunderlist, this.convertHotelToWishlistedHotel(hotel)]
@@ -53,6 +44,7 @@ class TravelBug extends Component {
   }
 
   convertHotelToWishlistedHotel = hotel => {
+    console.log(hotel)
     return {
       hotel_id: hotel.id,
       imageurl: hotel.imageurl,
@@ -128,10 +120,13 @@ class TravelBug extends Component {
 
  
   hasHotelBeenAddedToWunderList = hotel => {
+    if (!Array.isArray(this.state.hotelsInWunderlist)) return false;
     return this.state.hotelsInWunderlist && this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)
+
   }
 
   handleUser = (user, options = { signup: false}) => {
+    if (user.error != undefined) return;
     console.log(user)
     window.localStorage.setItem('user', JSON.stringify(user))
     this.setState(
@@ -261,7 +256,7 @@ class TravelBug extends Component {
 
 
       <div className="site-footer">
-        © Sam Barker 2018
+        © Sarah Jacob 2018
       </div>
     </div>
     )
