@@ -13,7 +13,7 @@ class Homepage extends Component {
         <div className='homepage'>
 
           <div className='content-1'>
-            <video autoPlay loop muted className="myVideo" 
+            <video autoPlay loop className="myVideo" 
             style={{
               maxWidth: "100vw",
               display: "block",
