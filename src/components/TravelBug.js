@@ -44,7 +44,7 @@ class TravelBug extends Component {
   }
 
   convertHotelToWishlistedHotel = hotel => {
-    console.log(hotel)
+    // console.log(hotel)
     return {
       hotel_id: hotel.id,
       imageurl: hotel.imageurl,
@@ -126,7 +126,7 @@ class TravelBug extends Component {
   }
 
   handleUser = (user, options = { signup: false}) => {
-    if (user.error != undefined) return;
+    if (user.error !== undefined) return;
     console.log(user)
     window.localStorage.setItem('user', JSON.stringify(user))
     this.setState(

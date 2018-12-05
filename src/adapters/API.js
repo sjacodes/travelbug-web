@@ -56,7 +56,7 @@ class API {
   }
 
   static updateWishlistedHotel (wishlistedHotel) {
-    if (wishlistedHotel.id == undefined) return;
+    if (wishlistedHotel.id === undefined) return;
     return fetch(API.wishlistedHotels + '/' + wishlistedHotel.id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json'},

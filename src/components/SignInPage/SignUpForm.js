@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
 import './SignInPage.css'
 import API from '../../adapters/API'
-import { Link } from "react-router-dom";
 
 
 
