@@ -45,12 +45,13 @@ class Wishlist extends Component {
 
         <div id='list'>
           <Transition
-            keys={this.props.hotelsInWunderlist.map(hotel => hotel.hotel_id)}
+            items={this.props.hotelsInWunderlist}
+            keys={hotel => hotel.hotel_id}
             from={{ opacity: 0, height: 0 }}
             enter={{ opacity: 1, height: 'auto' }}
             leave={{ opacity: 0, height: 0, pointerEvents: 'none', border: 'none' }}>
 
-                { this.props.hotelsInWunderlist.map((hotel  => styles =>
+                { hotel  => styles =>
                   < WishlistItem 
                     key={hotel.hotel_id}
                     hotel={hotel}
@@ -62,7 +63,7 @@ class Wishlist extends Component {
                     removeHotelFromWunderlist={this.props.removeHotelFromWunderlist}
                     hasHotelBeenAddedToWunderList={this.props.hasHotelBeenAddedToWunderList}
                     />
-                ))}
+                }
           </Transition>
 
         </div>
