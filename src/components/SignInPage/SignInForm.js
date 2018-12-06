@@ -15,9 +15,26 @@ class SignInForm extends Component {
     password: ''
   }
 
-  handleChange = (e) => {
+  handleSubmit = () => {
+    const { email, password } = this.state
+    const { signin} = this.props
+  
+    API.signin(email, password)
+    .then(data => {
+      if (data.error) {
+        console.log("API", data)
+      } else {
+        console.log("data", data)
+        localStorage.setItem('token', data.token)
+        signin(data)
+      }
+   })
+  }
+
+
+  handleChange = (event) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -26,8 +43,6 @@ class SignInForm extends Component {
     API.signin(this.state.email, this.state.password)
       .then(resp => this.props.handleUser(resp))
   }
-
-
 
 
 

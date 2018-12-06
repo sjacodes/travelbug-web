@@ -13,9 +13,26 @@ class SignUpForm extends Component {
       errors: []
     }
 
-    handleChange = (e) => {
+    handleSubmit = () => {
+      const { email, password } = this.state
+      const { signin } = this.props
+
+      API.signup(email. password)
+       .then(data => {
+         if (data.error) {
+           console.log("API", data)
+         } else {
+           console.log("data", data)
+           localStorage.setItem('token', data.token)
+           signin(data)
+         }
+       })
+    }
+
+
+    handleChange = (event) => {
       this.setState({
-        [e.target.name]: e.target.value
+        [event.target.name]: event.target.value
       })
     }
 
