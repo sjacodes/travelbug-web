@@ -1,7 +1,10 @@
+
+
 .forms {
   text-align: center;
-  margin-left: 500px;
-  margin-right: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
 }
 
 .sign-in-header {

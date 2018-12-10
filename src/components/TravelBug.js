@@ -44,7 +44,6 @@ class TravelBug extends Component {
   }
 
   convertHotelToWishlistedHotel = hotel => {
-    // console.log(hotel)
     return {
       hotel_id: hotel.id,
       imageurl: hotel.imageurl,
@@ -172,8 +171,7 @@ class TravelBug extends Component {
     return (
     <div>
       <div style={{minHeight: 'calc(100vh - 75px)'}}>
-        <div className='menu'>
-          <Menu stackable pointing secondary>
+          <Menu id="menu" stackable pointing secondary fixed="top" fluid widths={4}>
               <Menu.Item
                   as={Link}
                   to='/'
@@ -216,7 +214,6 @@ class TravelBug extends Component {
               />
             }
           </Menu>
-        </div>  
           <div className="travel-bug">
             TRAVEL BUG
           </div> 

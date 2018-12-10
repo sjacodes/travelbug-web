@@ -1,10 +1,9 @@
-.menu {
+#menu {
   font-family: SackersGothicStd-Heavy, sans-serif;
   background-color: black
 }
 
 .menu-option {
-  margin-right: 22.5% !important;
   text-transform: uppercase !important;
   color: white !important;
 }
