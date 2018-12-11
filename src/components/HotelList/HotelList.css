@@ -93,10 +93,28 @@
   font-size: 16px;
   color: grey;
   text-align: center;
-  margin-left: 270px;
-  margin-right: 270px;
+  margin-left: 25px;
+  margin-right: 25px;
   letter-spacing: 1px;
   margin-bottom: 57px;
   line-height: 1.2
+}
+
+.img {
+  max-width: 100%;
+}
+
+
+  /* Small Devices, Tablets */
+  @media only screen and (max-width : 768px) {
+    .img {
+      width: 600px;
+    }
+  }
+
+@media screen and (max-width: 480px) {
+    .img {
+         width: 400px;
+    }
 }
 

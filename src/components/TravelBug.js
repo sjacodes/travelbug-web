@@ -3,7 +3,7 @@ import { Route, Link, withRouter, Switch } from "react-router-dom";
 import './TravelBug.css'
 import Wishlist from './Wishlist/Wishlist';
 import HotelList from './HotelList/HotelList';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Responsive, Icon } from 'semantic-ui-react'
 import Homepage from './Homepage/Homepage';
 import SignInPage from './SignInPage/SignInPage';
 import API from '../adapters/API'
@@ -16,7 +16,8 @@ class TravelBug extends Component {
     hotelsInWunderlist: [],
     currentUser: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : undefined,
     noteContent: '',
-    timer: undefined
+    timer: undefined,
+    menuOpen: false
   }
 
 
@@ -32,10 +33,11 @@ class TravelBug extends Component {
     if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
     if (this.state.currentUser !== undefined) {
       API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
-      .then(resp => resp.json())
-      .then(data => this.setState({
-        hotelsInWunderlist: data })
-      )
+        .then(resp => resp.json())
+        .then(data => this.setState({
+          hotelsInWunderlist: data
+        })
+        )
     } else {
       this.setState({
         hotelsInWunderlist: [...this.state.hotelsInWunderlist, this.convertHotelToWishlistedHotel(hotel)]
@@ -71,7 +73,7 @@ class TravelBug extends Component {
         {
           checked: false,
           content: 'Is within my price range'
-        }        
+        }
       ]
     }
   }
@@ -117,20 +119,20 @@ class TravelBug extends Component {
     })
   }
 
- 
+
   hasHotelBeenAddedToWunderList = hotel => {
     if (!Array.isArray(this.state.hotelsInWunderlist)) return false;
     return this.state.hotelsInWunderlist && this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)
 
   }
 
-  handleUser = (user, options = { signup: false}) => {
+  handleUser = (user, options = { signup: false }) => {
     if (user.error !== undefined) return;
     console.log(user)
     window.localStorage.setItem('user', JSON.stringify(user))
     this.setState(
       {
-        currentUser: {email: user.email, id: user.id}
+        currentUser: { email: user.email, id: user.id }
       },
       () => {
         if (options.signup) {
@@ -154,7 +156,7 @@ class TravelBug extends Component {
   }
 
   logoutUser = () => {
-    this.setState({currentUser: undefined, hotelsInWunderlist: []})
+    this.setState({ currentUser: undefined, hotelsInWunderlist: [] })
     window.localStorage.removeItem('user')
   }
 
@@ -167,95 +169,147 @@ class TravelBug extends Component {
     }[this.props.location.pathname]
   }
 
-  render () {
+  menuObjects = [
+    {
+      name: 'Home',
+      displayName: 'HOME',
+      linkTo: '/'
+    },
+    {
+      name: 'Explore',
+      displayName: 'EXPLORE',
+      linkTo: '/explore'
+    },
+    {
+      name: 'Wanderlist',
+      displayName: 'WANDERLIST',
+      linkTo: '/wanderlist'
+    },
+    {
+      name: 'Sign In',
+      displayName: 'SIGN IN',
+      linkTo: '/myaccount'
+    }
+  ]
+
+  toggleMenuOpen = () => this.setState({ menuOpen: !this.state.menuOpen })
+
+  menuItems = () => {
     return (
-    <div>
-      <div style={{minHeight: 'calc(100vh - 75px)'}}>
-          <Menu id="menu" stackable pointing secondary fixed="top" fluid widths={4}>
-              <Menu.Item
-                  as={Link}
-                  to='/'
-                  className="menu-option"
-                  name="Home"
-                  active={this.activeItem() === 'HOME'}
-                />
-              <Menu.Item
-                as={Link}
-                to='/explore'
-                className="menu-option"
-                name="Explore"
-                active={this.activeItem() === 'EXPLORE'}
-              />
-              <Menu.Item
-                as={Link}
-                to='/wanderlist'
-                className="menu-option"
-                name="Wanderlist"
-                active={this.activeItem() === 'WANDERLIST'}
-              />
-            {
-              this.state.currentUser ?
-              <Menu.Item
-                as={Link}
-                to='/myaccount'
-                className="menu-option"
-                style={{marginRight: "22%", color: "white"}}
-                name="Sign Out"
-                active={false}
-                onClick={() => this.logoutUser('Sign Out')}
-              />
-              :
-              <Menu.Item
-                as={Link}
-                to='/myaccount'
-                className="menu-option"
-                name="Sign In"
-                active={this.activeItem() === 'SIGN IN'}
-              />
-            }
+      <>
+      <Responsive as={Menu.Item}
+          onClick={this.toggleMenuOpen}
+          maxWidth={767}
+        >
+          <Icon name='bars' />
+        </Responsive>
+        {
+          this.menuObjects.map(menuItemObj => {
+            return (
+              <Responsive as={Menu.Item}
+              name={menuItemObj.name}
+              active={this.activeItem() === menuItemObj.displayName}
+              onClick={this.handleItemClick}
+              minWidth={this.state.menuOpen ? 0 : 768}
+            >
+              <Link to={menuItemObj.linkTo}>{menuItemObj.displayName}</Link>
+            </Responsive>
+            )
+          })
+        }
+      </>
+    )
+    // <Menu.Item
+    //           as={Link}
+    //           to='/'
+    //           className="menu-option"
+    //           name="Home"
+    //           active={this.activeItem() === 'HOME'}
+    //         />
+    //         <Menu.Item
+    //           as={Link}
+    //           to='/explore'
+    //           className="menu-option"
+    //           name="Explore"
+    //           active={this.activeItem() === 'EXPLORE'}
+    //         />
+    //         <Menu.Item
+    //           as={Link}
+    //           to='/wanderlist'
+    //           className="menu-option"
+    //           name="Wanderlist"
+    //           active={this.activeItem() === 'WANDERLIST'}
+    //         />
+    //         {
+    //           this.state.currentUser ?
+    //             <Menu.Item
+    //               as={Link}
+    //               to='/myaccount'
+    //               className="menu-option"
+    //               style={{ marginRight: "22%", color: "white" }}
+    //               name="Sign Out"
+    //               active={false}
+    //               onClick={() => this.logoutUser('Sign Out')}
+    //             />
+    //             :
+    //             <Menu.Item
+    //               as={Link}
+    //               to='/myaccount'
+    //               className="menu-option"
+    //               name="Sign In"
+    //               active={this.activeItem() === 'SIGN IN'}
+    //             />
+    //         }
+  }
+
+
+  render() {
+    return (
+      <>
+        <div style={{ minHeight: 'calc(100vh - 75px)' }}>
+          <Menu id="menu" stackable inverted secondary fixed="top" fluid widths={this.menuObjects.length}>
+            {this.menuItems()}
           </Menu>
           <div className="travel-bug">
             TRAVEL BUG
-          </div> 
-          <div className="travel-title" style={{display: this.props.location.pathname !== "/" ? 'block' : 'none'}}>
+          </div>
+          <div className="travel-title" style={{ display: this.props.location.pathname !== "/" ? 'block' : 'none' }}>
             {this.activeItem()}
-          </div> 
-                <div className="background-home">
-              <div>
-                <Switch>
-                  <Route exact path='/' render={props => <Homepage handleItemClick={this.handleItemClick} 
-                        logoutUser = {this.logoutUser} currentUser={this.state.currentUser} 
-                   />} />
-                  <Route exact path='/explore' render={props => <HotelList 
-                        addToWunderlist={this.addToWunderlist}
-                        removeHotelFromWunderlist={this.removeHotelFromWunderlist}
-                        hasHotelBeenAddedToWunderList={this.hasHotelBeenAddedToWunderList}
-                        handleUser={this.handleUser}  {...props} />} />
-                  <Route exact path='/wanderlist' render={props => <Wishlist
-                      changeWishlistItem={this.changeWishlistItem}
-                      changeWishlistItemNote ={this.changeWishlistItemNote}
-                      hotelsInWunderlist={this.state.hotelsInWunderlist}
-                      addToWunderlist={this.addToWunderlist}
-                      removeHotelFromWunderlist={this.removeHotelFromWunderlist}
-                      hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
-                      handleUser={this.handleUser}  
-                      currentUser={this.state.currentUser}
-                      updateWanderlist={this.updateWanderlist}
-                      {...props} />} />  
-                  <Route exact path='/myaccount' render={props => <SignInPage 
-                          handleUser={this.handleUser}  
-                        {...props} />} />
-                </Switch>
-              </div>
-            </div>
-            </div>
-          
+          </div>
+          <div className="background-home">
+            <Switch>
+              <Route exact path='/' render={props => <Homepage handleItemClick={this.handleItemClick}
+                logoutUser={this.logoutUser} currentUser={this.state.currentUser}
+              />} />
+              <Route exact path='/explore' render={props => <HotelList
+                addToWunderlist={this.addToWunderlist}
+                removeHotelFromWunderlist={this.removeHotelFromWunderlist}
+                hasHotelBeenAddedToWunderList={this.hasHotelBeenAddedToWunderList}
+                handleUser={this.handleUser}  {...props} />} />
+              <Route exact path='/wanderlist' render={props => <Wishlist
+                changeWishlistItem={this.changeWishlistItem}
+                changeWishlistItemNote={this.changeWishlistItemNote}
+                hotelsInWunderlist={this.state.hotelsInWunderlist}
+                addToWunderlist={this.addToWunderlist}
+                removeHotelFromWunderlist={this.removeHotelFromWunderlist}
+                hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
+                handleUser={this.handleUser}
+                currentUser={this.state.currentUser}
+                updateWanderlist={this.updateWanderlist}
+                {...props} />} />
+              <Route exact path='/myaccount' render={props => <SignInPage
+                handleUser={this.handleUser}
+                {...props} />} />
+            </Switch>
+          </div>
+        </div>
 
 
-      <div className="site-footer">
-        © Sarah Jacob 2018
+
+        <div className="site-footer">
+          © Sarah Jacob 2018
       </div>
-    </div>
+      </>
     )
   }
 }

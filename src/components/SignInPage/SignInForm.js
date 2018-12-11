@@ -50,7 +50,7 @@ class SignInForm extends Component {
     return (
         <div className="sign-in-form">
             <div className="sign-in-header"> 
-              <b> Sign in </b> so you can begin your journey with us. 
+              <b> Sign in </b> so you can continue your journey with us. 
             </div>
             <Form className="signin-form">
               <Form.Field>

@@ -18,7 +18,7 @@ class HotelCollection extends Component {
         {
          this.props.hotels.map(hotel =>
           <div key={hotel.id}>
-            <img src={hotel.imageurl} alt=""/>
+            <img className="img" src={hotel.imageurl} alt=""/>
             <br/>
             <br/>
               <a className="hotel-list-image-heading" href={"http://" + hotel.website} target="_blank">
