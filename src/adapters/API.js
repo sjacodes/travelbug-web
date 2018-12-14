@@ -87,12 +87,18 @@ class API {
 
 }
 
-API.baseURL = 'http://localhost:3000'
-API.signinURL = API.baseURL + '/signin'
-API.validateURL = API.baseURL + '/validate'
-API.itemsURL = API.baseURL + '/items'
-API.signupURL = API.baseURL + '/signup'
-API.wishlistedHotels = API.baseURL + '/wishlisted_hotels'
+
+process.env.REACT_APP_STAGE === 'dev' 
+  ? API.baseUrl = 'http://localhost:3000'
+  : API.baseUrl = 'https://travel-bug-api.herokuapp.com'
+
+API.signinURL = API.baseUrl + '/signin'
+API.validateURL = API.baseUrl + '/validate'
+API.itemsURL = API.baseUrl + '/items'
+API.signupURL = API.baseUrl + '/signup'
+API.wishlistedHotels = API.baseUrl + '/wishlisted_hotels'
+
+
 
 export default API
 
