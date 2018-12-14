@@ -1,3 +1,6 @@
+.hotel-img {
+  max-width: 100%;
+}
 
 .wishlist-hotel-image {
     font-family: 'Montserrat', sans-serif;
@@ -11,11 +14,9 @@
 
 .wishlist-hotel-checklist {
   max-width: "100%";
-  padding-top: 60px;
-}
+  }
 
 .wishlist-hotel-note {
-  padding-top: 40px;
   padding-right: 40px;
 }
 
@@ -30,10 +31,7 @@
 }
 
 .remove-from-wishlist-button {
-  margin-top: 100px;
-  margin-bottom: 74px;
-  margin-right: 70px;
-  margin-left: 15px;
+  margin-bottom: 60px;
   color: white;
   font-family: SackersGothicStd-Heavy, sans-serif;
   font-weight: normal;
@@ -151,4 +149,18 @@
 .ui.grid.blade {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+#list {
+  margin: auto;
+  max-width: 1000px;
+}
+
+
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .wishlist-hotel-image {
+    padding-left: 15px;
+  }
 }
