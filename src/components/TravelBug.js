@@ -184,11 +184,6 @@ class TravelBug extends Component {
       name: 'Wanderlist',
       displayName: 'WANDERLIST',
       linkTo: '/wanderlist'
-    },
-    {
-      name: 'Sign In',
-      displayName: 'SIGN IN',
-      linkTo: '/myaccount'
     }
   ]
 
@@ -217,49 +212,29 @@ class TravelBug extends Component {
             )
           })
         }
+        {
+              this.state.currentUser ?
+              <Responsive as={Menu.Item}
+              name='Sign out'
+              active={this.activeItem() === 'SIGN OUT'}
+              onClick={() => this.logoutUser('Sign Out')}
+              minWidth={this.state.menuOpen ? 0 : 768}
+            >
+              <Link to='/myaccount'>SIGN OUT</Link>
+            </Responsive>
+                :
+                <Responsive as={Menu.Item}
+              name='Sign in'
+              active={this.activeItem() === 'SIGN IN'}
+              onClick={() => this.logoutUser('Sign Out')}
+              minWidth={this.state.menuOpen ? 0 : 768}
+            >
+              <Link to='/myaccount'>SIGN IN</Link>
+            </Responsive>
+            }
       </>
     )
-    // <Menu.Item
-    //           as={Link}
-    //           to='/'
-    //           className="menu-option"
-    //           name="Home"
-    //           active={this.activeItem() === 'HOME'}
-    //         />
-    //         <Menu.Item
-    //           as={Link}
-    //           to='/explore'
-    //           className="menu-option"
-    //           name="Explore"
-    //           active={this.activeItem() === 'EXPLORE'}
-    //         />
-    //         <Menu.Item
-    //           as={Link}
-    //           to='/wanderlist'
-    //           className="menu-option"
-    //           name="Wanderlist"
-    //           active={this.activeItem() === 'WANDERLIST'}
-    //         />
-    //         {
-    //           this.state.currentUser ?
-    //             <Menu.Item
-    //               as={Link}
-    //               to='/myaccount'
-    //               className="menu-option"
-    //               style={{ marginRight: "22%", color: "white" }}
-    //               name="Sign Out"
-    //               active={false}
-    //               onClick={() => this.logoutUser('Sign Out')}
-    //             />
-    //             :
-    //             <Menu.Item
-    //               as={Link}
-    //               to='/myaccount'
-    //               className="menu-option"
-    //               name="Sign In"
-    //               active={this.activeItem() === 'SIGN IN'}
-    //             />
-    //         }
+
   }
 
 
@@ -267,7 +242,7 @@ class TravelBug extends Component {
     return (
       <>
         <div style={{ minHeight: 'calc(100vh - 75px)' }}>
-          <Menu id="menu" stackable inverted secondary fixed="top" fluid widths={this.menuObjects.length}>
+          <Menu id="menu" stackable inverted secondary fixed="top" fluid widths={this.menuObjects.length + 1}>
             {this.menuItems()}
           </Menu>
           <div className="travel-bug">
