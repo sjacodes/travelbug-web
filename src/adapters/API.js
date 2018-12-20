@@ -49,6 +49,16 @@ class API {
     }).then(resp => resp.json())
   }
 
+  static getHotels () {
+    const token = localStorage.getItem('token')
+    return fetch(API.hotelsURL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      }
+    }).then(resp => resp.json())
+  }
+
   static fetchWishlist (user) {
     return fetch(API.baseURL + '/users/' + user.id + '/wishlist/', {
       method: 'GET',
@@ -97,7 +107,7 @@ API.validateURL = API.baseUrl + '/validate'
 API.itemsURL = API.baseUrl + '/items'
 API.signupURL = API.baseUrl + '/signup'
 API.wishlistedHotels = API.baseUrl + '/wishlisted_hotels'
-
+API.hotelsURL = API.baseUrl + '/hotels'
 
 
 export default API
