@@ -12,13 +12,17 @@ class HotelCollection extends Component {
     this.props.addToWunderlist(hotel)
   }
 
+  updateImgUrl = url => {
+    return process.env.REACT_APP_STAGE === 'dev' ? url : url.replace('http://localhost:3000', 'https://travel-bug-api.herokuapp.com')
+  }
+
   render () {
   	return (
     <div className='hotel-collection'>
         {
          this.props.hotels.map(hotel =>
           <div key={hotel.id}>
-            <img className="img" src={hotel.imageurl} alt=""/>
+            <img className="img" src={this.updateImgUrl(hotel.imageurl)} alt=""/>
             <br/>
             <br/>
               <a className="hotel-list-image-heading" href={"http://" + hotel.website} target="_blank">
