@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HotelCollection from './HotelCollection'
 import './HotelList.css'
+import API from '../../adapters/API'
 
 
 class HotelList extends Component {
@@ -10,8 +11,7 @@ class HotelList extends Component {
   }
 
   getHotels = () => {
-    fetch('http://localhost:3000/hotels')
-    .then(resp => resp.json())
+    API.getHotels()
     .then(data => this.setState({
       hotels: data
     }))
