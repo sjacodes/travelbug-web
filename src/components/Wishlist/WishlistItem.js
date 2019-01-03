@@ -10,6 +10,9 @@ import { animated } from 'react-spring'
 
 class WishlistItem extends Component {
 
+  updateImgUrl = url => {
+    return process.env.REACT_APP_STAGE === 'dev' ? url : url.replace('http://localhost:3000', 'https://travel-bug-api.herokuapp.com')
+  }
   
 
   render () {
@@ -21,7 +24,7 @@ class WishlistItem extends Component {
             <Grid stackable key={this.props.hotel.id} className="blade" >
                   <Grid.Column   width={5}>
                     <div>
-                      <img className="hotel-img" style={{maxWidth: "100%", paddingBottom: "10px"}} src={this.props.hotel.imageurl} alt=""/>
+                      <img className="hotel-img" style={{maxWidth: "100%", paddingBottom: "10px"}} src={this.updateImgUrl(hotel.imageurl)} alt=""/>
                     </div>           
                   </Grid.Column>
                   <Grid.Column  width={3} >
