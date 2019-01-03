@@ -25,7 +25,7 @@ class WishlistItem extends Component {
             <Grid stackable key={this.props.hotel.id} className="blade" >
                   <Grid.Column   width={5}>
                     <div>
-                      <img className="hotel-img" style={{maxWidth: "100%", paddingBottom: "10px"}} src={this.updateImgUrl(props.hotel.imageurl)} alt=""/>
+                      <img className="hotel-img" style={{maxWidth: "100%", paddingBottom: "10px"}} src={this.updateImgUrl(this.props.hotel.imageurl)} alt=""/>
                     </div>           
                   </Grid.Column>
                   <Grid.Column  width={3} >
