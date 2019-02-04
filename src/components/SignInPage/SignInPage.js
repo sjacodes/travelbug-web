@@ -3,9 +3,7 @@ import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
 import './SignInPage.css'
 
-
 class SignInPage extends Component {
-
 
   render() {
     return (
@@ -20,8 +18,5 @@ class SignInPage extends Component {
     )
   }
 }
-
-
-
 
 export default SignInPage
