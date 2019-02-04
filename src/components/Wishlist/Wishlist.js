@@ -10,7 +10,7 @@ import { Transition } from 'react-spring'
 class Wishlist extends Component {
 
   componentDidMount = () => {
-    if (this.props.hotelsInWunderlist.length === 0 && !!this.props.currentUser) {
+    if (this.props.hotelsInWunderlist.length === 0 && !!this.props.currentUserId) {
       this.props.updateWanderlist()
     }
   }
@@ -30,7 +30,7 @@ class Wishlist extends Component {
           This is yours.
         </div>
 
-        { !this.props.currentUser &&
+        { !this.props.currentUserId &&
           <div>
             <div className="dont-lose">
               <p > Don't want to lose your wanderlist? </p>

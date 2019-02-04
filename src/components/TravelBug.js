@@ -7,18 +7,27 @@ import { Menu, Responsive, Icon } from 'semantic-ui-react'
 import Homepage from './Homepage/Homepage';
 import SignInPage from './SignInPage/SignInPage';
 import API from '../adapters/API'
+import jwt_decode from 'jwt-decode'
 
 class TravelBug extends Component {
   state = {
     hotelsInWunderlist: [],
-    currentUserId: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : undefined,
     noteContent: '',
     timer: undefined,
     menuOpen: false
   }
 
+  currentUserId = () => {
+    const token = window.localStorage.getItem('token');
+    if ( typeof token === 'string' ) {
+      return jwt_decode(token)['id']
+    } else {
+      return null
+    }
+  }
+
   updateWanderlist = () => {
-    API.fetchWishlist(this.state.currentUserId)
+    API.fetchWishlist(this.currentUserId)
       .then(data => this.setState({
         hotelsInWunderlist: data
       }))
@@ -27,7 +36,7 @@ class TravelBug extends Component {
 
   addToWunderlist = (hotel) => {
     if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
-    if (this.state.currentUserId !== undefined) {
+    if (this.currentUserId !== null) {
       API.saveUsersWishlistedHotels(hotel)
         .then(data => this.setState({
           hotelsInWunderlist: data
@@ -121,35 +130,26 @@ class TravelBug extends Component {
 
   handleUser = (data, options = { signup: false }) => {
     window.localStorage.setItem('token', data.token)
-    window.localStorage.setItem('user_id', data.user_id)
-    this.setState(
-      {
-        currentUserId: data.user_id
-      },
-      () => {
-        if (options.signup) {
-          API.saveUsersWishlistedHotels(
-            this.state.hotelsInWunderlist
-          )
-            .then(data => this.setState({
-              hotelsInWunderlist: data
-            }))
-            .catch(errorData => console.log('Error: ', errorData))
-        } else {
-          API.fetchWishlist(this.state.currentUserId)
-            .then(data => this.setState({
-              hotelsInWunderlist: data
-            }))
-            .catch(errorData => console.log('Error: ', errorData))
-        }
-      }
-    )
+    if (options.signup) {
+      API.saveUsersWishlistedHotels(
+        this.state.hotelsInWunderlist
+      )
+        .then(data => this.setState({
+          hotelsInWunderlist: data
+        }))
+        .catch(errorData => console.log('Error: ', errorData))
+    } else {
+      API.fetchWishlist(this.currentUserId)
+        .then(data => this.setState({
+          hotelsInWunderlist: data
+        }))
+        .catch(errorData => console.log('Error: ', errorData))
+    }
   }
 
   logoutUser = () => {
-    this.setState({ currentUserId: undefined, hotelsInWunderlist: [] })
+    this.setState({ hotelsInWunderlist: [] })
     window.localStorage.removeItem('token')
-    window.localStorage.removeItem('user_id')
   }
 
   activeItem = () => {
@@ -205,7 +205,7 @@ class TravelBug extends Component {
           })
         }
         {
-              this.state.currentUserId ?
+              this.currentUserId ?
               <Responsive as={Menu.Item}
               name='Sign out'
               active={this.activeItem() === 'SIGN OUT'}
@@ -244,7 +244,7 @@ class TravelBug extends Component {
           <div className="background-home">
             <Switch>
               <Route exact path='/' render={props => <Homepage handleItemClick={this.handleItemClick}
-                logoutUser={this.logoutUser} currentUser={this.state.currentUserId}
+                logoutUser={this.logoutUser}
               />} />
               <Route exact path='/explore' render={props => <HotelList
                 addToWunderlist={this.addToWunderlist}
@@ -259,7 +259,7 @@ class TravelBug extends Component {
                 removeHotelFromWunderlist={this.removeHotelFromWunderlist}
                 hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
                 handleUser={this.handleUser}
-                currentUser={this.state.currentUserId}
+                currentUserId={this.state.currentUserId}
                 updateWanderlist={this.updateWanderlist}
                 {...props} />} />
               <Route exact path='/myaccount' render={props => <SignInPage
