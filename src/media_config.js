@@ -3,14 +3,13 @@
 // video - https://support.cloudinary.com/hc/en-us/articles/115003021231-How-can-I-optimize-my-videos-
 
 // cloudinary user name
-const user_name = ""
+const user_name = process.env.REACT_APP_CLOUDINARY_USERNAME;
 // image width for homepage-hotel-img and homepage-hotel-img-third
 const im_width = 450;
 // image quality runs between 0 to 100
 const im_qual = '100';
 // video quality
 const vid_qual = '60'
-
 
 const urls = {
     video: `https://res.cloudinary.com/${user_name}/video/upload/q_${vid_qual}/vc_auto/v1549030145/travelbug/travel.mp4`,
