@@ -3,10 +3,7 @@
 // We're assuming that your backend will only ever return valid JSON.
 
 class BACKENDAPI {
-    constructor(env) {
-        const baseURL = env === 'dev'
-            ? 'http://localhost:3000'
-            : 'https://travel-bug-api.herokuapp.com'
+    constructor(baseURL) {
 
         this.urls = {
             signin: baseURL + '/signin',
@@ -112,6 +109,6 @@ class BACKENDAPI {
     }
 }
 
-const API = new BACKENDAPI(process.env.REACT_APP_STAGE)
+const API = new BACKENDAPI(process.env.REACT_APP_BACKEND_URL)
 
 export default API;
