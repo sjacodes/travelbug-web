@@ -27,7 +27,7 @@ class TravelBug extends Component {
   }
 
   updateWanderlist = () => {
-    API.fetchWishlist(this.currentUserId)
+    API.fetchWishlist(this.currentUserId())
       .then(data => this.setState({
         hotelsInWunderlist: data
       }))
@@ -36,7 +36,7 @@ class TravelBug extends Component {
 
   addToWunderlist = (hotel) => {
     if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
-    if (this.currentUserId !== null) {
+    if (this.currentUserId() !== null) {
       API.saveUsersWishlistedHotels(hotel)
         .then(data => this.setState({
           hotelsInWunderlist: data
@@ -139,7 +139,7 @@ class TravelBug extends Component {
         }))
         .catch(errorData => console.log('Error: ', errorData))
     } else {
-      API.fetchWishlist(this.currentUserId)
+      API.fetchWishlist(this.currentUserId())
         .then(data => this.setState({
           hotelsInWunderlist: data
         }))
@@ -205,7 +205,7 @@ class TravelBug extends Component {
           })
         }
         {
-              this.currentUserId ?
+              this.currentUserId() ?
               <Responsive as={Menu.Item}
               name='Sign out'
               active={this.activeItem() === 'SIGN OUT'}
@@ -259,7 +259,7 @@ class TravelBug extends Component {
                 removeHotelFromWunderlist={this.removeHotelFromWunderlist}
                 hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
                 handleUser={this.handleUser}
-                currentUserId={this.state.currentUserId}
+                currentUserId={this.currentUserId()}
                 updateWanderlist={this.updateWanderlist}
                 {...props} />} />
               <Route exact path='/myaccount' render={props => <SignInPage
