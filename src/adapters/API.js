@@ -1,118 +1,114 @@
-class API {
+// Refactored API class
+// Added robust fetch pattern: https://css-tricks.com/using-fetch/
+// We're assuming that your backend will only ever return valid JSON.
 
+class BACKENDAPI {
+    constructor(baseURL) {
 
-  static signin (email, password) {
-    return fetch(API.signinURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    }).then(resp => resp.json())
-  }
+        this.urls = {
+            signin: baseURL + '/signin',
+            signup: baseURL + '/signup',
+            wishlistedHotels: baseURL + '/wishlisted_hotels',
+            hotels: baseURL + '/hotels',
+            wishlist: (user_id) => baseURL + '/users/' + user_id + '/wishlist/'
+        }
+    }
 
+    static handleResponse(response) {
+        return response.json()
+            .then(json => {
+                if (response.ok) {
+                    return json;
+                } else {
+                    const error = Object.assign(
+                        {},
+                        json,
+                        {
+                            status: response.status,
+                            statusText: response.statusText
+                        }
+                    )
+                    return Promise.reject(error)
+                }
+            })
+    }
 
-  static signup (email, password) {
-    return fetch(API.signupURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    }).then(resp => {
-      if (resp.ok) {
-        return resp.json()
-      } else {
-        return Promise.reject(resp)
-      }
-    })
-  }
+    static createRequest(url, method="GET", data={}, auth=false) {
+        const headers = new Headers({'Content-Type': 'application/json'})
+        if (auth) headers.append('Authorization', localStorage.getItem('token'))
+        const request = new Request(
+                url,
+                {
+                    method: method,
+                    headers: headers,
+                    body: method === 'GET' ? null : JSON.stringify(data)
+                }
+            );
+        return request;
+    }
 
-   static validate (token) {
-    return fetch(API.validateURL, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token
-      }
-    }).then(resp => resp.json())
-  }
+    createUrl = (endpoint, id=null) => {
+        if (typeof this.urls[endpoint] === 'function') {
+            return this.urls[endpoint](id)
+        } else if (id !== null) {
+            return this.urls[endpoint] + '/' + id
+        } else {
+            return this.urls[endpoint]
+        }
+    }
 
-   static getItems () {
-    const token = localStorage.getItem('token')
-    return fetch(API.itemsURL, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token
-      }
-    }).then(resp => resp.json())
-  }
+    signup = (email, password) => {
+        const data = { email:email, password:password }
+        const url = this.createUrl('signup')
+        return fetch(BACKENDAPI.createRequest(url, 'POST', data))
+            .then(BACKENDAPI.handleResponse)
+    }
 
-  static getHotels () {
-    const token = localStorage.getItem('token')
-    return fetch(API.hotelsURL, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token
-      }
-    }).then(resp => resp.json())
-  }
+    signin = (email, password) => {
+        const data = { email:email, password:password }
+        const url = this.createUrl('signin')
+        return fetch(BACKENDAPI.createRequest(url, 'POST', data))
+            .then(BACKENDAPI.handleResponse)
+    }
 
-  static fetchWishlist (user) {
-    return fetch(API.baseURL + '/users/' + user.id + '/wishlist/', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
-  }
+    fetchWishlist = (user_id) => {
+        const data = { user_id:user_id }
+        const url = this.createUrl('wishlist', user_id)
+        return fetch(BACKENDAPI.createRequest(url, 'GET', data, true))
+            .then(BACKENDAPI.handleResponse)
+    }
 
-  static removeUsersWishlistedHotels (hotel) {
-    return fetch(API.wishlistedHotels + '/' + hotel.id, {
-      method: 'DELETE'
-    })
-  }
+    saveUsersWishlistedHotels = (hotel) => {
+        const data = { hotel:hotel }
+        const url = this.createUrl('wishlistedHotels')
+        return fetch(BACKENDAPI.createRequest(url, 'POST', data, true))
+            .then(BACKENDAPI.handleResponse)
+    }
 
-  static saveUsersWishlistedHotels (hotel, user) {
-    return fetch(API.wishlistedHotels, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        hotel: hotel,
-        user: user
-      })
-    })
-  }
+    removeUsersWishlistedHotels = (hotel) => {
+        const data = { hotel:hotel }
+        const url = this.createUrl('wishlistedHotels', hotel.id)
+        return fetch(BACKENDAPI.createRequest(url, 'DELETE', data, true))
+            .then(BACKENDAPI.handleResponse)
+    }
 
-  static updateWishlistedHotel (wishlistedHotel) {
-    if (wishlistedHotel.id === undefined) return;
-    return fetch(API.wishlistedHotels + '/' + wishlistedHotel.id, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        note: wishlistedHotel.note,
-        checklist_items: wishlistedHotel.checklist_items
-      })
-    })
-  }
+    updateWishlistedHotel = (hotel) => {
+        const data = {
+            note: hotel.note,
+            checklist_items: hotel.checklist_items
+        }
+        const url = this.createUrl('wishlistedHotels', hotel.id)
+        return fetch(BACKENDAPI.createRequest(url, 'PATCH', data, true))
+            .then(BACKENDAPI.handleResponse)
+    }
 
+    getHotels = () => {
+        const url = this.createUrl('hotels')
+        return fetch(BACKENDAPI.createRequest(url))
+            .then(BACKENDAPI.handleResponse)
+    }
 }
 
+const API = new BACKENDAPI(process.env.REACT_APP_BACKEND_URL)
 
-process.env.REACT_APP_STAGE === 'dev' 
-  ? API.baseUrl = 'http://localhost:3000'
-  : API.baseUrl = 'https://travel-bug-api.herokuapp.com'
-
-API.signinURL = API.baseUrl + '/signin'
-API.validateURL = API.baseUrl + '/validate'
-API.itemsURL = API.baseUrl + '/items'
-API.signupURL = API.baseUrl + '/signup'
-API.wishlistedHotels = API.baseUrl + '/wishlisted_hotels'
-API.hotelsURL = API.baseUrl + '/hotels'
-
-
-export default API
-
-
-
-
- 
+export default API;

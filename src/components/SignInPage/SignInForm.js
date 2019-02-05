@@ -4,33 +4,29 @@ import './SignInPage.css'
 import API from '../../adapters/API'
 import { Link } from "react-router-dom";
 
-
-
-
-
 class SignInForm extends Component {
 
   state = {
     email: '',
-    password: ''
+    password: '',
+    errors: []
   }
 
   handleSubmit = () => {
     const { email, password } = this.state
-    const { signin} = this.props
+    const { handleUser, history } = this.props
   
     API.signin(email, password)
-    .then(data => {
-      if (data.error) {
-        console.log("API", data)
-      } else {
-        console.log("data", data)
-        localStorage.setItem('token', data.token)
-        signin(data)
-      }
-   })
+      .then(data => {
+        handleUser(data, { signup: true })
+        history.push('/explore')
+      })
+      .catch(errorData => {
+        this.setState({
+          errors: [...this.state.errors, errorData.error]
+        })
+      })
   }
-
 
   handleChange = (event) => {
     this.setState({
@@ -38,35 +34,33 @@ class SignInForm extends Component {
     })
   }
 
-
-  handleClickOnSignIn = () => {
-    API.signin(this.state.email, this.state.password)
-      .then(resp => this.props.handleUser(resp))
-  }
-
-
-
   render () {
     return (
-        <div className="sign-in-form">
-            <div className="sign-in-header"> 
-              <b> Sign in </b> so you can continue your journey with us. 
-            </div>
-            <Form className="signin-form">
-              <Form.Field>
-              <input name='email' value={this.state.email} placeholder='Email' onChange={this.handleChange} />
-              </Form.Field>
-            <Form.Field>
-              <input name='password' value={this.state.password} type='password' placeholder='Password' onChange={this.handleChange} />
-            </Form.Field>
-              <Link to='/explore'>
-                <button className="sign-in-button" onClick={() => this.handleClickOnSignIn()} type='submit'>Sign In</button>
-              </Link>
-            </Form>
-            <br/>
-            <br/>
-       </div>
-         
+      <div className="sign-in-form">
+        <div className="sign-in-header">
+          <b> Sign in </b> so you can continue your journey with us.
+        </div>
+        {
+          this.state.errors.length > 0 && (
+            <div className="sign-up-errors">
+              {
+                this.state.errors.map(e => <p>{e}</p>)
+              }
+          </div>
+          )
+        }
+        <Form className="signin-form">
+          <Form.Field>
+          <input name='email' value={this.state.email} placeholder='Email' onChange={this.handleChange} />
+          </Form.Field>
+          <Form.Field>
+            <input name='password' value={this.state.password} type='password' placeholder='Password' onChange={this.handleChange} />
+          </Form.Field>
+          <button className="sign-in-button" onClick={this.handleSubmit} type='submit'>Sign In</button>
+        </Form>
+        <br/>
+        <br/>
+      </div>
     )
   }
 }

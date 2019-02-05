@@ -7,37 +7,41 @@ import { Menu, Responsive, Icon } from 'semantic-ui-react'
 import Homepage from './Homepage/Homepage';
 import SignInPage from './SignInPage/SignInPage';
 import API from '../adapters/API'
-
-
-
+import jwt_decode from 'jwt-decode'
 
 class TravelBug extends Component {
   state = {
     hotelsInWunderlist: [],
-    currentUser: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : undefined,
     noteContent: '',
     timer: undefined,
     menuOpen: false
   }
 
+  currentUserId = () => {
+    const token = window.localStorage.getItem('token');
+    if ( typeof token === 'string' ) {
+      return jwt_decode(token)['id']
+    } else {
+      return null
+    }
+  }
 
   updateWanderlist = () => {
-    API.fetchWishlist(this.state.currentUser)
-      .then(resp => resp.json())
+    API.fetchWishlist(this.currentUserId())
       .then(data => this.setState({
         hotelsInWunderlist: data
       }))
+      .catch(errorData => console.log('Error: ', errorData))
   }
 
   addToWunderlist = (hotel) => {
     if (this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)) return;
-    if (this.state.currentUser !== undefined) {
-      API.saveUsersWishlistedHotels(hotel, this.state.currentUser)
-        .then(resp => resp.json())
+    if (this.currentUserId() !== null) {
+      API.saveUsersWishlistedHotels(hotel)
         .then(data => this.setState({
           hotelsInWunderlist: data
-        })
-        )
+        }))
+        .catch(errorData => console.log('Error: ', errorData))
     } else {
       this.setState({
         hotelsInWunderlist: [...this.state.hotelsInWunderlist, this.convertHotelToWishlistedHotel(hotel)]
@@ -78,13 +82,12 @@ class TravelBug extends Component {
     }
   }
 
-
   removeHotelFromWunderlist = (selectedHotel) => {
     this.setState({
       hotelsInWunderlist: this.state.hotelsInWunderlist.filter(hotel => selectedHotel !== hotel),
       activeItem: "Wanderlist"
     })
-    API.removeUsersWishlistedHotels(selectedHotel, this.state.currentUser)
+    API.removeUsersWishlistedHotels(selectedHotel)
   }
 
   changeWishlistItem = (hotel_id, item, itemIndex) => {
@@ -119,45 +122,34 @@ class TravelBug extends Component {
     })
   }
 
-
   hasHotelBeenAddedToWunderList = hotel => {
     if (!Array.isArray(this.state.hotelsInWunderlist)) return false;
     return this.state.hotelsInWunderlist && this.state.hotelsInWunderlist.map(wlh => wlh.hotel_id).includes(hotel.id)
 
   }
 
-  handleUser = (user, options = { signup: false }) => {
-    if (user.error !== undefined) return;
-    console.log(user)
-    window.localStorage.setItem('user', JSON.stringify(user))
-    this.setState(
-      {
-        currentUser: { email: user.email, id: user.id }
-      },
-      () => {
-        if (options.signup) {
-          API.saveUsersWishlistedHotels(
-            this.state.hotelsInWunderlist,
-            user
-          )
-            .then(res => res.json())
-            .then(data => this.setState({
-              hotelsInWunderlist: data
-            }))
-        } else {
-          API.fetchWishlist(this.state.currentUser)
-            .then(res => res.json())
-            .then(data => this.setState({
-              hotelsInWunderlist: data
-            }))
-        }
-      }
-    )
+  handleUser = (data, options = { signup: false }) => {
+    window.localStorage.setItem('token', data.token)
+    if (options.signup) {
+      API.saveUsersWishlistedHotels(
+        this.state.hotelsInWunderlist
+      )
+        .then(data => this.setState({
+          hotelsInWunderlist: data
+        }))
+        .catch(errorData => console.log('Error: ', errorData))
+    } else {
+      API.fetchWishlist(this.currentUserId())
+        .then(data => this.setState({
+          hotelsInWunderlist: data
+        }))
+        .catch(errorData => console.log('Error: ', errorData))
+    }
   }
 
   logoutUser = () => {
-    this.setState({ currentUser: undefined, hotelsInWunderlist: [] })
-    window.localStorage.removeItem('user')
+    this.setState({ hotelsInWunderlist: [] })
+    window.localStorage.removeItem('token')
   }
 
   activeItem = () => {
@@ -213,7 +205,7 @@ class TravelBug extends Component {
           })
         }
         {
-              this.state.currentUser ?
+              this.currentUserId() ?
               <Responsive as={Menu.Item}
               name='Sign out'
               active={this.activeItem() === 'SIGN OUT'}
@@ -234,9 +226,7 @@ class TravelBug extends Component {
             }
       </>
     )
-
   }
-
 
   render() {
     return (
@@ -254,7 +244,7 @@ class TravelBug extends Component {
           <div className="background-home">
             <Switch>
               <Route exact path='/' render={props => <Homepage handleItemClick={this.handleItemClick}
-                logoutUser={this.logoutUser} currentUser={this.state.currentUser}
+                logoutUser={this.logoutUser}
               />} />
               <Route exact path='/explore' render={props => <HotelList
                 addToWunderlist={this.addToWunderlist}
@@ -269,7 +259,7 @@ class TravelBug extends Component {
                 removeHotelFromWunderlist={this.removeHotelFromWunderlist}
                 hasHotelBeenAddedToWunderList={this.removeHotelFromWunderlist}
                 handleUser={this.handleUser}
-                currentUser={this.state.currentUser}
+                currentUserId={this.currentUserId()}
                 updateWanderlist={this.updateWanderlist}
                 {...props} />} />
               <Route exact path='/myaccount' render={props => <SignInPage
@@ -278,9 +268,6 @@ class TravelBug extends Component {
             </Switch>
           </div>
         </div>
-
-
-
         <div className="site-footer">
           © Sarah Jacob 2018
       </div>

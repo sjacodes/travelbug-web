@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import video from './travel.mp4';
-import image from '../../Assets/homepageImage.jpg';
-import image2 from '../../Assets/BottomBladeImage1.jpg';
-import image3 from '../../Assets/BottomBladeImage2.jpg';
+import urls from '../../media_config';
 import { Image, Grid } from 'semantic-ui-react'
 import './Homepage.css'
 import { Link } from "react-router-dom";
 
 class Homepage extends Component {
   render () {
+    const { video, image, image2, image3 } = urls;
     return (
         <div className='homepage'>
 

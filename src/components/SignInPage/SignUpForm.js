@@ -3,55 +3,34 @@ import { Form } from 'semantic-ui-react'
 import './SignInPage.css'
 import API from '../../adapters/API'
 
-
-
 class SignUpForm extends Component {
 
-    state = {
-      email: '',
-      password: '',
-      errors: []
-    }
+  state = {
+    email: '',
+    password: '',
+    errors: []
+  }
 
-    handleSubmit = () => {
-      const { email, password } = this.state
-      const { signin } = this.props
+  handleSubmit = () => {
+    const { email, password } = this.state
+    const { handleUser, history } = this.props
 
-      API.signup(email. password)
-       .then(data => {
-         if (data.error) {
-           console.log("API", data)
-         } else {
-           console.log("data", data)
-           localStorage.setItem('token', data.token)
-           signin(data)
-         }
-       })
-    }
-
-
-    handleChange = (event) => {
-      this.setState({
-        [event.target.name]: event.target.value
+    API.signup(email, password)
+      .then(data => {
+        handleUser(data, { signup: true })
+        history.push('/explore')
       })
-    }
-
-
-
-  handleClickOnSignUp = () => {
-    API.signup(this.state.email, this.state.password)
-      .then(resp => {
-        this.props.handleUser(resp, { signup: true})
+      .catch(errorData => {
+        this.setState({
+          errors: [...this.state.errors, errorData.error]
+        })
       })
-      .then(() => this.props.history.push('/explore'))
-      .catch(resp => {
-        resp.json()
-          .then(data => {
-            this.setState({
-              errors: data.error
-            })
-          })
-      })
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
   render () {
@@ -66,7 +45,7 @@ class SignUpForm extends Component {
               {
                 this.state.errors.map(e => <p>{e}</p>)
               }
-           </div>
+          </div>
           )
         }
         <Form className="sign-up-form">
@@ -76,7 +55,7 @@ class SignUpForm extends Component {
           <Form.Field>
             <input name='password' value={this.state.password} type='password' placeholder='Password' onChange={this.handleChange} />
           </Form.Field>
-          <button className="sign-in-button" onClick={() => this.handleClickOnSignUp()} type='submit'>Sign Up</button>
+          <button className="sign-in-button" onClick={this.handleSubmit} type='submit'>Sign Up</button>
         </Form>
         <br/>
         <div className="or">
