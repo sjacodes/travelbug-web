@@ -104,6 +104,19 @@
   max-width: 100%;
 }
 
+.hotel-description {
+  position: relative;
+  height: 15em;
+}
+
+.hotel-description-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
 
   /* Small Devices, Tablets */
   @media only screen and (max-width : 768px) {

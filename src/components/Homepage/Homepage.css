@@ -7,10 +7,13 @@
 }
 
 .content-2 {
+  position: relative;
+  height: 320px;
   max-width: 100vw;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 5em;
 }
 
 
@@ -63,17 +66,20 @@
 }
 
 .homepage-hotel-text-div-for-background-image {
-  background-image: url("../../Assets/feature-brush.png") !important;
   background-repeat: no-repeat;
-  background-position:top right;
+  background-position: center center;
+  background-size: contain;
 }
 
 
 .second-box {
   max-width: 800px;
+  top: 0;
+  left: 0;
+  right: 0;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 60px;
+  position: absolute;
 }
 
 .third-box {
