@@ -15,7 +15,9 @@ const urls = {
     video: `https://res.cloudinary.com/${user_name}/video/upload/q_${vid_qual}/vc_auto/v1549030145/travelbug/travel.mp4`,
     image: `https://res.cloudinary.com/${user_name}/image/upload/w_${im_width}/q_${im_qual}/v1549029180/travelbug/homepageImage.png`,
     image2: `https://res.cloudinary.com/${user_name}/image/upload/w_${im_width}/q_${im_qual}/v1549029180/travelbug/BottomBladeImage1.png`,
-    image3: `https://res.cloudinary.com/${user_name}/image/upload/w_${im_width}/q_${im_qual}/v1549029180/travelbug/BottomBladeImage2.png`
+    image3: `https://res.cloudinary.com/${user_name}/image/upload/w_${im_width}/q_${im_qual}/v1549029180/travelbug/BottomBladeImage2.png`,
+    image4: `https://res.cloudinary.com/${user_name}/image/upload/w_${im_width}/q_${im_qual}/v1549029179/travelbug/feature-brush.png`,
+    image5: `https://res.cloudinary.com/${user_name}/image/upload/w_${im_width}/q_${im_qual}/v1549029179/travelbug/background-img.png`
 }
 
 export default urls;

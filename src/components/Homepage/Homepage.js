@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 class Homepage extends Component {
   render () {
-    const { video, image, image2, image3 } = urls;
+    const { video, image, image2, image3, image4 } = urls;
     return (
         <div className='homepage'>
 
@@ -23,13 +23,14 @@ class Homepage extends Component {
             </video>
           </div>
           <div className='content-2'>
+            <div className='background-slope'></div>
             <div className="second-box">
               <Grid stackable columns={2}>
                 <Grid.Column>
                     <Image className="homepage-hotel-img" src={image}/>
                 </Grid.Column>
                 <Grid.Column>
-                  <div className="homepage-hotel-text-div-for-background-image">
+                  <div className="homepage-hotel-text-div-for-background-image" style={{backgroundImage: `url(${image4})`}}>
                     <div className="homepage-hotel-text">
                       <div className="travel-bug-invites">
                         You are invited ...
