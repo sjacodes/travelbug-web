@@ -23,12 +23,12 @@
   font-family: SackersGothicStd-Heavy, sans-serif;
   font-weight: normal;
   font-style: normal;
-  line-height: 5;
   letter-spacing: 0.15em;
   text-align: center;
   text-transform: uppercase;
   font-size: 14px;
   text-decoration: none;
+  margin: 2em;
 }
 
 .hotel-list-add-to-wishlist-buttons {
