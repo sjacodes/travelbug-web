@@ -54,7 +54,7 @@
   font-weight: 300;
   font-size: 20px;
   color: white;
-  font-style: bo;
+  font-style: bold;
   font-weight: 500;
 }
 .grid-boxes {
@@ -76,8 +76,7 @@
   top: 0;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1em auto;
   position: absolute;
 }
 
@@ -172,7 +171,7 @@
   }
 
   .content-2 {
-    height: 32em;
+    height: 40em;
   }
 }
 
